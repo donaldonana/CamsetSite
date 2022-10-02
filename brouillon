@@ -1,0 +1,19 @@
+  <div class="row justify-content-center" >
+
+  
+      <input type="text" name="file_name" placeholder="Le nom du fichier..." id="myInput" 
+      style="width: 35%; 
+      height: 40px;
+      border-radius: 8px;
+      padding: 12px 10px;
+      " 
+      >
+
+  </div>
+
+
+  <div class="row justify-content-center" style="margin-bottom: 15px;">  
+      <p class="font-italic" id="error1" style="font-size: 11px; color: red; visibility: hidden;"> 
+        fichier non trouvé . 
+      </p>
+  </div>
