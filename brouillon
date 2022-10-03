@@ -17,3 +17,6 @@
         fichier non trouvé . 
       </p>
   </div>
+
+
+  git add -f db.sqlite3
