@@ -28,14 +28,22 @@
 
 function detail( texte, id, post, url, cat  ) {
 
-  $.each( $('.popup-box .popup-content'), function () { 
 
-    $(this).css({
-                         
-      'width': '600px',
-    });
+  if ($(window).width() > 500) {
 
-  });
+
+          $.each( $('.popup-box .popup-content'), function () { 
+
+        $(this).css({
+                             
+          'width': '600px',
+        });
+
+      });
+      
+  }
+
+
 
   var html = '';
   html = html  + '<strong>  Commentaire Id : </strong>  ' + id + '<br><br>' ;
@@ -57,6 +65,9 @@ function detail( texte, id, post, url, cat  ) {
 function LirePlus( texte, cat  ) {
 
   $.each( $('.popup-box .popup-content'), function () { 
+
+
+
 
     $(this).css({
                          
@@ -91,3 +102,6 @@ function popupBox(){
   popup.classList.toggle("open");
 
   };
+
+
+
