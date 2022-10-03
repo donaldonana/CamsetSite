@@ -36,7 +36,9 @@
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <link rel="stylesheet" href= {% static 'css/AppComments/Styles.css' %} type="text/css"> 
+  <link rel="stylesheet" href= {% static 'css/AppComments/Styles.css' %} type="text/css">
+  <link rel="stylesheet" href= {% static 'css/AppComments/PopupStyle.css' %} type="text/css">
+  <link rel="stylesheet" href= {% static 'css/AppComments/images.css' %} type="text/css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"integrity="-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
 
@@ -100,14 +102,7 @@
     </div>
 </div>
 
-<!-- 
-<td>{{comment.id}}</td>
-                  <td>{{comment.categorie}}</td>
-                  <td>{{comment.texte|truncatechars:60}}</td> 
-                  <td>{{comment.haineux}}</td>
-                  <td>{{comment.offensif}}</td>
-                  <td>{{comment.non_offensif}}</td>
-                  <td>{{comment.vote_final}}</td> -->
+ 
 
 <div class="container">
 
@@ -130,32 +125,44 @@
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-4">
                         <div class="media-body order-2 order-lg-1 text-center">
-                            <h4 class="mt-0 font-weight-bold mb-2">{{comment.categorie}}</h4>
-                            <p class="font-italic text-muted mb-0 " style="font-size: 15px;"><strong>Texte : </strong>  {{comment.texte|truncatechars:60}}</p>
+                            <h3 class="mt-0  mb-3 " style="color: #E91E63;">{{comment.categorie}}</h3>
+                            <p class="font-italic mb-0 font-weight-bold" style="font-size: 15px;">
+                             
+                              {% if comment.texte|length|get_digit:"-1" > 80 %}
+                                {{comment.texte|truncatechars:60}}
+                                <button type="button" class="btn btn-link btrm " style="color: blue;"
+                                onclick='LirePlus( "{{comment.texte}}" , "{{comment.categorie}}",  );'>
+                                  lire plus
+                                </button>
+                              {% else %}
+                                {{comment.texte}}
+                              {% endif %}
+
+                            </p>
                             <div class="d-flex align-items-center row row-cols-1 row-cols-md-2 row-cols-lg-4  mt-4"  >
 
 
                                 <div class="col align-self-center">
 
-                                   <h6 class="font-weight-bold my-1"  >Vote Haineux : {{comment.haineux}}</h6>
+                                   <h6 class="text-muted my-1 "  >Vote Haineux : {{comment.haineux}}</h6>
                                   
                                 </div>
 
                                 <div class="col mx-auto">
 
-                                   <h6 class="font-weight-bold my-1"  >Vote Offensif : {{comment.offensif}}</h6>
+                                   <h6 class="text-muted my-1"  >Vote Offensif : {{comment.offensif}}</h6>
                                   
                                 </div>
 
                                 <div class="col mx-auto">
 
-                                   <h6 class="font-weight-bold my-1"  >Vote Normal : {{comment.non_offensif}}</h6>
+                                   <h6 class="text-muted my-1"  >Vote Normal : {{comment.non_offensif}}</h6>
                                   
                                 </div>
 
                                 <div class="col mx-auto">
 
-                                   <h6 class="font-weight-bold my-1 font-italic" style="color: #E91E63;">Vote Final : {{comment.vote_final}}</h6>
+                                   <h6 class="  my-1 font-italic" style="color: #E91E63;">Vote Final : {{comment.vote_final}}</h6>
                                   
                                 </div>
 
@@ -163,7 +170,7 @@
                                 <div class="col mx-auto" style="margin-top: 25px;">
 
                                   <button type="button" class="btn btn-sm btn-outline-info font-italic"  style="width: 45%" 
-                                   onclick='LirePlus(  "{{comment.texte}}" , 
+                                   onclick='detail(  "{{comment.texte}}" , 
                                       "{{comment.id}}",
                                     "{{comment.post_titre}}",
                                     "{{comment.post_url}}", 
@@ -182,6 +189,24 @@
             </ul> <!-- End -->
         </div>
     </div>
+
+
+          <!-- read more popup box start -->
+   <div class="popup-box" >
+      <div class="popup-content">
+          <div class="popup-header">
+             <h4 class="font-italic"></h4>
+             <span class="popup-close-icon">&times;</span>
+          </div>
+          <div class="popup-body">
+            
+          </div>
+          <div class="popup-footer">
+            <button class="btn btn-sm btn-outline-info popup-close-btn">Close</button>
+          </div>
+      </div>
+   </div>
+  <!-- read more popup box end -->
 
 
 
@@ -245,12 +270,6 @@
 
       {% endif %}
 
-
-
-
-
-
-
     {% endif %}
 
 
@@ -294,8 +313,8 @@
 
  
 
-<script src={% static 'js/AppComments/app.js' %}></script>
-<script src={% static 'js/AppComments/script.js' %}></script>
+ <script src={% static 'js/AppComments/app.js' %}></script>
+  <script src={% static 'js/AppComments/script.js' %}></script>
     
 {% endblock content %}
 

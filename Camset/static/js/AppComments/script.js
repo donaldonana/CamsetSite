@@ -6,33 +6,7 @@
       const popupCloseIcon = popup.querySelector(".popup-close-icon");
 
 
-       for (var i = 0; i < cards.length; i++) {
-         cards[i].addEventListener("click",function(event){
-
-          if(event.target.tagName.toLowerCase() == "button"){
-            // alert(event.target.parentElement.parentElement.innerHTML)
-
-            $.each( $('.popup-box .popup-content'), function () { 
-
-
-               $(this).css({       
-                  'width': '350px',
-                });
-
-             });
-             var item = event.target.parentElement.parentElement ;
-             const readMoreCont = item.querySelector(".read-more-cont").innerHTML;
-             popup.querySelector(".popup-body").innerHTML = readMoreCont;
-             item = item.parentElement;
-             const h3 = item.querySelector("h3").innerHTML;
-             popup.querySelector("h4").innerHTML = h3;
-             popupBox();
-
-
-          }
-
-       });
-      }
+        
 
       popupCloseBtn.addEventListener("click", popupBox);
       popupCloseIcon.addEventListener("click", popupBox);
@@ -52,7 +26,7 @@
 
 
 
-function LirePlus( texte, id, post, url, cat  ) {
+function detail( texte, id, post, url, cat  ) {
 
   $.each( $('.popup-box .popup-content'), function () { 
 
@@ -76,6 +50,32 @@ function LirePlus( texte, id, post, url, cat  ) {
   popupBox();
 
 };
+
+
+
+
+function LirePlus( texte, cat  ) {
+
+  $.each( $('.popup-box .popup-content'), function () { 
+
+    $(this).css({
+                         
+      'width': '350px',
+    });
+
+  });
+
+  var html = '';
+
+  html = html   + texte + '<br> <br>';
+
+  $(".popup-body").html(html); 
+  
+  $(".popup-header").html('<h4 class="font-italic">' + cat   + '</h4>');
+  popupBox();
+
+};
+
 
 
 

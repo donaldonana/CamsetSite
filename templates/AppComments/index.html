@@ -124,9 +124,17 @@
               </div>
               <div class="card-body">
 
-                <p class="card-text" id="text-{{comment.id}}">{{comment.texte}}</p>
-                <p class="card-text read-more-cont" style="visibility: hidden;" id="fulltext-{{comment.id}}">   {{comment.texte}}
-                </p>
+                 {% if comment.texte|length|get_digit:"-1" > 120 %}   
+                    <p class="card-text" id="text-{{comment.id}}">{{comment.texte|truncatechars:120}}
+                      <button type="button" class="btn btn-link btrm " style="color: blue;"
+                      onclick='LirePlus( "{{comment.texte}}" , "{{comment.categorie}}",  );'>
+                        lire plus
+                      </button>
+                    </p>  
+                    
+                  {% else %}
+                    <p class="card-text" id="text-{{comment.id}}">{{comment.texte}}</p>          
+                  {% endif %}
 
                 <span class="bad" style="cursor: pointer;" onclick="FuriousCall({{comment.id}});" > 
                  <img  class=" "  id="furImg-{{comment.id}}" src= {% static 'img/furious-2.png' %}  style="width: 10%" /> 
@@ -142,7 +150,7 @@
 
               </div>
               <div class="card-footer text-muted">
-                <button type="button" class="btn btn-sm btn-outline-info font-italic"  onclick='LirePlus(  "{{comment.texte}}" , 
+                <button type="button" class="btn btn-sm btn-outline-info font-italic"  onclick='detail(  "{{comment.texte}}" , 
                   "{{comment.id}}",
                 "{{comment.post_titre}}",
                 "{{comment.post_url}}", 
