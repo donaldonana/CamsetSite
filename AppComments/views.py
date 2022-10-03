@@ -178,12 +178,26 @@ def save(request):
 def ListResult(request):
 
     # Comment.objects.values_list('haineux', flat=True)
-
-    comments_list = Comment.objects.all()
-
      
 
-    context = {'comments': comments_list}
+    comments_list = Comment.objects.get_queryset().order_by('?')
+
+    paginator = Paginator(comments_list, 5)
+
+  
+    request.user.save()
+
+    page = request.GET.get('page', 1)
+
+    try:
+        comments = paginator.page(page)
+    except PageNotAnInteger:
+        comments = paginator.page(page)
+    except EmptyPage:
+        comments = paginator.page(paginator.num_pages)
+ 
+
+    context = {'comments': comments}
 
     var = Comment.objects.all().aggregate(Sum('haineux'))
     context['haineux__sum'] = var['haineux__sum']
