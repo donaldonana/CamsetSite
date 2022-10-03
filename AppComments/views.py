@@ -12,7 +12,10 @@ from django.db.models import Sum, Count
 import json
 import itertools
 import re
+from pathlib import Path
 import os
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Create your views here.
@@ -178,9 +181,9 @@ def save(request):
 def ListResult(request):
 
     # Comment.objects.values_list('haineux', flat=True)
-     
 
-    comments_list = Comment.objects.get_queryset().order_by('?')
+
+    comments_list = Comment.objects.get_queryset().order_by('id')
 
     paginator = Paginator(comments_list, 5)
 
@@ -219,7 +222,7 @@ def ListResult(request):
 @login_required
 def admin(request):
     comments = Comment.objects.all()
-    path = "./Camset/static/jsonFiles"
+    path =  os.path.join(BASE_DIR, 'Camset\\static\\') + "jsonFiles"
 
     dir_list = os.listdir(path) 
     context = {"comments" : comments, "dir_list" : dir_list}
@@ -230,7 +233,7 @@ def upload(request):
 
     file_name = request.GET.get('file_name', None)
 
-    file_path =  "./Camset/static/jsonFiles/" + file_name
+    file_path =  os.path.join(BASE_DIR, 'Camset\\static\\') + "jsonFiles\\" + file_name
 
     try:
         with open(file_path , 'r', encoding='latin-1' ) as handle:
