@@ -131,7 +131,7 @@
                     <div class="media align-items-lg-center flex-column flex-lg-row p-4">
                         <div class="media-body order-2 order-lg-1 text-center">
                             <h4 class="mt-0 font-weight-bold mb-2">{{comment.categorie}}</h4>
-                            <p class="font-italic text-muted mb-0 "><strong>Texte : </strong>  {{comment.texte|truncatechars:60}}</p>
+                            <p class="font-italic text-muted mb-0 " style="font-size: 15px;"><strong>Texte : </strong>  {{comment.texte|truncatechars:60}}</p>
                             <div class="d-flex align-items-center row row-cols-1 row-cols-md-2 row-cols-lg-4  mt-4"  >
 
 
@@ -162,7 +162,8 @@
                                 
                                 <div class="col mx-auto" style="margin-top: 25px;">
 
-                                  <button type="button" class="btn btn-sm btn-outline-info font-italic"  onclick='LirePlus(  "{{comment.texte}}" , 
+                                  <button type="button" class="btn btn-sm btn-outline-info font-italic"  style="width: 45%" 
+                                   onclick='LirePlus(  "{{comment.texte}}" , 
                                       "{{comment.id}}",
                                     "{{comment.post_titre}}",
                                     "{{comment.post_url}}", 
