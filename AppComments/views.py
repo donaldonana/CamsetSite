@@ -197,7 +197,7 @@ def admin(request):
         comments = paginator.page(paginator.num_pages)
  
 
-    path =  os.path.join(BASE_DIR, 'staticfiles/jsonFiles') 
+    path =  os.path.join(BASE_DIR, 'staticfiles/JsonFiles') 
 
     dir_list = os.listdir(path) 
     dir_list_filters = []
