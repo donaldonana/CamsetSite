@@ -215,7 +215,7 @@ def upload(request):
 
     file_name = request.GET.get('file_name', None)
 
-    file_path =  os.path.join(BASE_DIR, 'staticfiles/jsonFiles/' + file_name)  
+    file_path =  os.path.join(BASE_DIR, 'staticfiles/JsonFiles/' + file_name)  
 
     try:
         with open(file_path , 'r', encoding='latin-1' ) as handle:
