@@ -197,10 +197,17 @@ def admin(request):
         comments = paginator.page(paginator.num_pages)
  
 
-    path =  os.path.join(BASE_DIR, 'Camset/static/jsonFiles') 
+    path =  os.path.join(BASE_DIR, 'staticfiles/jsonFiles') 
 
     dir_list = os.listdir(path) 
-    context = {"comments" : comments, "dir_list" : dir_list}
+    dir_list_filters = []
+    regex = re.compile(r'^[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+\.+')
+    for e in dir_list:
+        if regex.search(e):
+            pass
+        else:
+            dir_list_filters.append(e)
+    context = {"comments" : comments, "dir_list" : dir_list_filters}
     return render(request, 'AppComments/admin.html', context)
 
 
@@ -208,7 +215,7 @@ def upload(request):
 
     file_name = request.GET.get('file_name', None)
 
-    file_path =  os.path.join(BASE_DIR, 'Camset/static/jsonFiles/' + file_name)  
+    file_path =  os.path.join(BASE_DIR, 'staticfiles/jsonFiles/' + file_name)  
 
     try:
         with open(file_path , 'r', encoding='latin-1' ) as handle:
