@@ -105,45 +105,27 @@
 }
 
 
- function deleteItems() {
+ function deleteItem(id) {
     if (confirm("Are you sure?")) {
+
+      $('li#'+id+'').css('background-color' , '#ccc');
+      $('li#'+id+'').fadeOut('slow');
         
-          var id = [];
-          $(':checkbox:checked').each(function(i){
-
-            id[i] = $(this).val();
-          })
-          if (id.length === 0) {
-
-            alert("Aucun commentaires à supprimer");
-          }
-
-          else{
-
             // alert(id);
 
             $.ajax({
-                    data: {"ids" : id },
+                    data: {"id" : id },
                     url: 'delete',
                     // method : "POST",
                     // on success
                     success: function(response) {
-
-                      for (var i = 0; i < id.length; i++) {
-                        $('tr#'+id[i]+'').css('background-color' , '#ccc');
-                        $('tr#'+id[i]+'').fadeOut('slow');
-
-
-                      }
-
-
-                      $(':checkbox:checked').each(function(i){
-
-                        $(this).prop('checked', false);
-
-                      })
-
-                      id = [];
+ 
+                      $('li#'+id+'').css('background-color' , '#ccc');
+                      $('li#'+id+'').fadeOut('slow');
+  
+                      // $(':checkbox:checked').each(function(i){
+                      //   $(this).prop('checked', false);
+                      // })
  
                     },
                     // on error
@@ -152,7 +134,6 @@
                         console.log(response.responseJSON.errors)
                     }
                 });
-          }
     }
     return false;
 };

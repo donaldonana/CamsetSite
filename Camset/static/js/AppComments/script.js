@@ -46,10 +46,9 @@ function detail( texte, id, post, url, cat  ) {
 
 
   var html = '';
-  html = html  + '<strong>  Commentaire Id : </strong>  ' + id + '<br><br>' ;
-
-  html = html  + '<strong>  Post : </strong>  ' + post + '<br><br>' ;
+  html = html  + '<strong>  Id : </strong>  ' + id + '<br><br>' ;
   html = html  + '<strong> Commentaire : </strong> ' + texte + '<br> <br>';
+  html = html  + '<strong> Post : </strong>  ' + post + '<br><br>' ;
   html = html  + '<strong> Lien vers le Post : </strong> ' + '<a href = ' + url + '> Vers Le Post</a>' + '<br>';
 
   $(".popup-body").html(html); 

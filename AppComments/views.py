@@ -130,49 +130,7 @@ def save(request):
         com_user = comments.objects.create(reponse=item["reponse"] , person = request.user, comment = comment)
         com_user.save()
 
-
-    # empty = Comment.objects.none()
-
-    # if non_offensif > offensif and non_offensif > haineux:
-    #         comment.vote_final = "normal"
-    #     elif offensif > non_offensif and offensif > haineux :
-    #         comment.vote_final = "offensif"
-    #     elif haineux > non_offensif and haineux > offensif:
-    #         comment.vote_final = "haineux"
-
-
-    # # print(request.user.temporaire.all())
-
-
-    # for c in request.user.temporaire.all():
-
-    #     if c.temp_haineux > 0 :
-    #         c.haineux = c.haineux + c.temp_haineux
-    #         com_user = comments.objects.create(reponse="haineux", person = request.user, comment = c)
-    #         com_user.save()
-
-    #     if c.temp_offensif > 0 :
-    #         c.offensif = c.offensif + c.temp_offensif
-    #         com_user = comments.objects.create(reponse="offensif", person = request.user, comment = c)
-    #         com_user.save()
-
-
-    #     if c.temp_non_offensif > 0 :
-    #         c.non_offensif = c.non_offensif + c.temp_non_offensif
-    #         com_user = comments.objects.create(reponse="normal", person = request.user, comment = c)
-    #         com_user.save()
-
-    #     c.temp_haineux = 0
-    #     c.temp_offensif = 0
-    #     c.temp_non_offensif = 0
-    #     c.save()
-
-
-
-    # request.user.temporaire.set(empty)   
-    # request.user.save()
-
-    # print("save ddddddddddddddddd")
+ 
 
     return JsonResponse({"data":"success"})
 
@@ -221,7 +179,24 @@ def ListResult(request):
 
 @login_required
 def admin(request):
-    comments = Comment.objects.all()
+
+    comments_list = Comment.objects.get_queryset().order_by('id')
+
+    paginator = Paginator(comments_list, 5)
+
+  
+    request.user.save()
+
+    page = request.GET.get('page', 1)
+
+    try:
+        comments = paginator.page(page)
+    except PageNotAnInteger:
+        comments = paginator.page(page)
+    except EmptyPage:
+        comments = paginator.page(paginator.num_pages)
+ 
+
     path =  os.path.join(BASE_DIR, 'Camset/static/jsonFiles') 
 
     dir_list = os.listdir(path) 
@@ -275,13 +250,10 @@ def DeleteAll(request):
 
 def delete(request):
 
-    ids = request.GET.getlist('ids[]')
-
-    print(ids)
-
-    for id in ids :
-        comment = Comment.objects.get(pk=id)
-        comment.delete()
+    # ids = request.GET.getlist('ids[]')
+    id = request.GET.get('id')  
+    comment = Comment.objects.get(pk=int(id))
+    comment.delete()
 
 
     return JsonResponse({"status":"success"})

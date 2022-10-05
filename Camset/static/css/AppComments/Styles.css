@@ -126,3 +126,28 @@ background-color: #902e07;
 
 
 .text-gray{color: #aaa} 
+
+
+.holder {
+  background: #f0efe9;
+  min-height: 100vh;
+}
+
+.rounded {
+  border-radius: 1rem !important;
+}
+
+ 
+
+input:checked + label {
+  text-decoration: line-through;
+  color: #adb5bd;
+}
+
+label {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
