@@ -1,0 +1,130 @@
+
+  {% load static %}
+
+<!--   <div class="row d-flex align-items-center justify-content-center  " style="margin-bottom: 5px; margin-top: 10px;  ">
+    <div class="col-lg-6 col-sm-12  align-self-center forcanvas"  >
+
+    <h4 class="font-italic"  > STATISTIQUES DE VOS VOTES </h4>
+
+
+    </div>
+
+    <div class="col-lg-6  col-sm-12 align-self-center forcanvas" >
+
+    <h4 class="font-italic"> STATISTIQUES GlOBAL  </h4>
+
+
+    </div>
+
+  </div> -->
+
+<div class="row d-flex align-items-center justify-content-center  " style="margin-bottom: 25px; margin-top: 10px;  ">
+    <div class="col-lg-6 col-sm-12 align-self-center forcanvas">
+
+
+
+     <canvas id="myChart" width="20" height="20" class="align-self-center justify-content-center" style="">
+          
+      </canvas>  
+
+
+    </div>
+
+    <div class="col-lg-6 col-sm-12 align-self-center forcanvas" style="margin-top: 20px;" >
+
+    <h4 class="font-italic"  > Total Commentaires : 15 </h4>
+    <h4 class="font-italic"  > Voté haineux : 20 </h4>
+    <h4 class="font-italic"  > Voté offensif : 25 </h4>
+    <h4 class="font-italic"  > Voté normal : 17 </h4>
+
+
+
+    </div>
+
+</div>
+
+
+
+
+    
+   
+ 
+    <!-- <div class="col-lg-12 d-flex  align-self-center justify-content-center forcanvas " style=" text-align:center;" >
+ 
+        <canvas id="myChart" width="20" height="20" class="align-self-center justify-content-center" style="">
+          
+        </canvas>
+     
+    </div>
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript">
+		// d3.csv("https://github.com/ccodwg/Covid19Canada/raw/master/official_datasets/qc/qc_testing_datasets_prov.csv", function(data) {
+  //   console.log(data);
+  //   });
+
+const ctx = document.getElementById('myChart').getContext('2d');
+Chart.register(ChartDataLabels);
+const myChart = new Chart(ctx, {
+    type: 'doughnut',
+  data: {
+    datasets: [
+      {
+        data: [99.999, 0.001],
+        backgroundColor: [ 'rgb(255, 99, 132)', 'rgb(255, 159, 64)'],
+      },
+    ],
+    labels: ['Restant', 'Voté'],
+  },
+  options: {
+    plugins: {
+    	title: {
+                display: true,
+                text: 'STATISTIQUES DE VOS VOTES'
+                // font-size:  20px;
+            },
+
+        legend: {
+                display: true,
+                position : 'bottom'
+            },
+      datalabels: {
+        formatter: (value) => {
+          return value + '%';
+        }
+      },
+      doughnutlabel: {
+        labels: [{
+          text: '550',
+          font: {
+            size: 20,
+            weight: 'bold'
+          }
+        }, {
+          text: 'total'
+        }]
+      }
+    }
+  }
+});
+
+
+$("#changedata").on("click", function() {
+    myChart.data.datasets[0].data = [80,20];
+    myChart.update();
+});
+ 
+	</script>
