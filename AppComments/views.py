@@ -47,7 +47,8 @@ def index(request):
     context = {'comments': comments}
     context['user'] = request.user
     return render(request, 'AppComments/index.html', context)
-    
+
+
 
 
 
@@ -265,4 +266,9 @@ def delete(request):
 
     return JsonResponse({"status":"success"})
 
-    
+
+
+@login_required
+def help(request):
+ 
+    return render(request, 'AppComments/help.html') 

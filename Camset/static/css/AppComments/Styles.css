@@ -151,3 +151,25 @@ label {
 a {
   text-decoration: none;
 }
+
+ 
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+.forcanvas {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+ .forcanvas {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+ .forcanvas {
+    width: 25%;
+  }
+}

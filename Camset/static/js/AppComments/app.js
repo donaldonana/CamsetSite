@@ -1,23 +1,9 @@
 $(document).ready(function () {
 
-  // alert( "$(this).text()" );
 
   
 
-  // $.each( $('p[id^=text-]'), function () {
-
-  //   var content = $(this).html();
-
-  //   if(content.length > showChar) {
-
-  //     var c = content.substr(0, showChar);
-  //     var html =   c  + ellipsestext + '<button type="button" class="btn   btn-link btrm " style="color: blue;">' 
-  //     +moretext+'</button>  ' ;
-
-  //     $(this).html(html); 
-  //   }
-
-  // });
+  // $.each( $('p[id^=text-]') 
 
 
   $.mynamespace = {};
@@ -144,6 +130,13 @@ function admin(){
   window.setTimeout(function () { window.location.href = '/admin'; }, 0);
 
 };
+
+function help(){
+  
+  window.setTimeout(function () { window.location.href = '/help'; }, 0);
+
+};
+
 
  
 

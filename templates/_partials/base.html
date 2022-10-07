@@ -1,4 +1,4 @@
-{%load static %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,24 +8,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-
-     {% block import %}
+{% block import %}
 
              
-            <link rel="stylesheet" href=  {% static 'bootstrap-4.4.1/css/bootstrap.min.css' %} >
-            <link rel="stylesheet" href=  {% static 'bootstrap-5.0.2-dist/css/bootstrap.min.css' %} >
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href=  {% static 'bootstrap-4.4.1/css/bootstrap.min.css' %} >
+<link rel="stylesheet" href=  {% static 'bootstrap-5.0.2-dist/css/bootstrap.min.css' %} >
+                    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 
-            <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"integrity="-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>       
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"  >
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"> 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"integrity="-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
+
+<link rel="stylesheet" href= {% static 'css/AppComments/Styles.css' %} type="text/css">
+<link rel="stylesheet" href= {% static 'css/AppComments/PopupStyle.css' %} type="text/css">
+<link rel="stylesheet" href= {% static 'css/AppComments/images.css' %} type="text/css">
+<link rel="stylesheet" href= {% static 'css/AppComments/modal.css' %} type="text/css">
+
 
         
-        {% endblock %}
+{% endblock %}
 
-        {% block css %}
 
-        {% endblock %}
+{% block add_css %}
+
+
+
+{% endblock %}
+
+         
 
     <title>
 
@@ -47,23 +71,25 @@
 
 <body>
 
-     
     
 
 
-        {% block content%}
+
+{% block content%}
 
 
-        {% endblock content%}
+{% endblock %}
 
-       
-     
+          
+<footer id="footer-content" style=" margin-top: 40px; left: 0; text-align: center; width: 100%;">
+      <small>Copyright &copy; Donald O.</small>
+</footer>      
+
+<script src={% static 'js/AppComments/ajouter.js' %}></script>
+<script src={% static 'js/AppComments/app.js' %}></script>
+<script src={% static 'js/AppComments/script.js' %}></script>
 
 
-        
-             
-        
-            
         
 </body>
 </html>

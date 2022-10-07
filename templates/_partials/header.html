@@ -1,52 +1,45 @@
-{%load static %}
-
+{% load static %}
 
 <div class="container-fluid"  >
 
-<div class=" row " style="padding-bottom: 6px;  border-bottom: 1px solid rgba(0, 0, 0, 0.3);">
+    <div class=" row " style="padding-bottom: 6px;  border-bottom: 1px solid rgba(0, 0, 0, 0.3);">
 
-<div class="col-lg-3 align-self-center">
+      <div class="col-lg-3 align-self-center"> </div>
+   
+      <div class="col-lg-6 align-self-center"  >
+        <img src={% static 'img/user.png' %} style="width: 15%"> <br>
+        <p class="leade font-italic" style="color: black">{{user.email}}</p>
+      </div>
 
-  <!-- <a class="leade font-italic" style="color: black " href="">onanadonald@gmail.com</a> -->
+      <div class="col-lg-3 align-self-center" id="thegrid"  >
 
-</div>
- 
-<div class="col-lg-6 align-self-center"  >
-<img src={% static 'img/user.png' %} style="width: 15%"> <br>
-  <p class="leade font-italic" style="color: black">onanadonald@gmail.com</p>
+        <div class="dropdown" >
+        <div id="grid-one" class="icon" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"   aria-expanded="false">
+        <span></span>
+        </div>
 
-</div>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" >
 
-<div class="col-lg-3 align-self-center" id="thegrid"  >
+          <button type="button" class="btn btn-outline-link dropdown-item"  onclick="main();"><i class="fa fa-home fa-lg"></i> Acceuil </button>
+           
+          <button type="button" class="btn btn-outline-link dropdown-item" onclick="listResult();"> <i class="fa fa-bar-chart fa-lg"></i> Statistiques </button>
 
-  <div class="dropdown" >
+          {% if user.is_superuser %}
+          <button type="button" class="btn btn-outline-link dropdown-item" onclick="admin();"> <i class="fa fa-cog fa-lg" aria-hidden="true"></i> Admin Page
+          </button>
+          {% endif %}
 
-  
+          <button type="button" class="btn btn-outline-link dropdown-item" onclick="help();"> <i class="fa fa-question-circle fa-lg" aria-hidden="true"></i> Help
+          </button>
 
-  <div id="grid-one" class="icon" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"   aria-expanded="false">
-  <span></span>
-  </div>
+          <button type="button" class="btn btn-outline-link dropdown-item" onclick="logout();"> <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> Déconnexion
+          </button>
+           
+        </div>
+        </div>
 
-
-
-  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" >
-
-
-    <button type="button" class="btn btn-outline-link dropdown-item"  onclick="main();"><i class="fa fa-home fa-lg"></i> Acceuil </button>
-     
-    <button type="button" class="btn btn-outline-link dropdown-item" onclick="listResult();"> <i class="fa fa-bar-chart fa-lg"></i> Statistiques </button>
-    <button type="button" class="btn btn-outline-link dropdown-item" onclick="logout();"> <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> Déconnexion
-    </button>
-
- 
-     
-  </div>
-</div>
-
-
+      </div>
+   
+    </div>
 </div>
 
-
-    
-</div>
-</div>

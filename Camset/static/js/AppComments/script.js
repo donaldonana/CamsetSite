@@ -18,6 +18,7 @@
       });
 
 
+  
 
               
   });
@@ -30,6 +31,7 @@ function detail( texte, id, post, url, cat  ) {
 
 
   if ($(window).width() > 500) {
+
 
 
           $.each( $('.popup-box .popup-content'), function () { 

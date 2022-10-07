@@ -106,7 +106,7 @@
 
 
  function deleteItem(id) {
-    if (confirm("Are you sure?")) {
+    if (confirm("Etes vous sure de vouloir supprimer ce commentaire ? ")) {
 
       $('li#'+id+'').css('background-color' , '#ccc');
       $('li#'+id+'').fadeOut('slow');
