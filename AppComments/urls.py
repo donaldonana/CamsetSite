@@ -12,6 +12,8 @@ urlpatterns = [
     path('DeleteAll', views.DeleteAll, name='DeleteAll'), 
     path('admin', views.admin, name='admin'),
     path('help', views.help, name='help'),
-    path("list_result", views.ListResult, name='list_result'),
+    path('filtering', views.filtering, name='filtering'),
+
+    path("stats", views.stats, name='stats'),
        
 ]

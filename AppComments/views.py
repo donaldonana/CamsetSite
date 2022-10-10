@@ -5,7 +5,9 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import random
+
 from django.http import JsonResponse
 from AppAuth.models import comments
 from django.db.models import Sum, Count
@@ -25,9 +27,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 @login_required
 def index(request):
 
-    comments_user = request.user.commentaires.all().values_list('id', flat=True)
-    comments_list = Comment.objects.get_queryset().exclude(id__in = comments_user ).order_by('?')
+    comments_user = list(request.user.commentaires.get_queryset() )
+    # comments_user = request.user.commentaires.all().values_list('id', flat=True)
 
+    # comments_list = Comment.objects.get_queryset().exclude(id__in = comments_user ).order_by('id')
+    comments = list(Comment.objects.get_queryset()  )
+    comments_list = []
+
+
+    for el in comments:
+        if el not in comments_user:
+            comments_list.append(el)
+             
+
+
+    random.shuffle(comments_list)
     paginator = Paginator(comments_list, 6)
 
   
@@ -48,41 +62,7 @@ def index(request):
     context['user'] = request.user
     return render(request, 'AppComments/index.html', context)
 
-
-
-
-
-
-
-@login_required
-def create_todo(request):
-    form = TodoForm()
-    context = {'form': form}
-
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        is_completed = request.POST.get('is_completed', False)
-
-        todo = Todo()
-
-        todo.title = title
-        todo.description = description
-        todo.is_completed = True if is_completed == "on" else False
-        todo.owner = request.user
-        todo.save()
-
-        messages.add_message(request, messages.SUCCESS, "Todo created successfully"
-
-                             )
-
-        return HttpResponseRedirect(reverse("todo", kwargs={'id': todo.pk}))
-
-    return render(request, 'todo/create-todo.html', context)
-
  
-    return JsonResponse({"data":"success"})
-
 
 def format(a):
     # url = re.sub('\.com$', '', url)
@@ -101,7 +81,7 @@ def MAX(non_offensif, offensif, haineux):
     else:
         return ""
 
-
+@login_required
 def save(request):
 
     num = re.compile('[0-9]+')
@@ -137,7 +117,7 @@ def save(request):
 
 
 @login_required
-def ListResult(request):
+def stats(request):
 
     # Comment.objects.values_list('haineux', flat=True)
 
@@ -170,18 +150,31 @@ def ListResult(request):
     nbr_cat = Comment.objects.values('categorie').annotate(Count('categorie'))
     context['nbr_cat'] = len(nbr_cat)
     context['nbr_texte'] = len(comments_list)
+    context['user_vote'] = len(request.user.commentaires.get_queryset())
     
 
 
 
-    return render(request, 'AppComments/ListResult.html', context)
+    return render(request, 'AppComments/stats.html', context)
 
-
+def is_ajax(request):
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 @login_required
 def admin(request):
 
-    comments_list = Comment.objects.get_queryset().order_by('id')
+    if is_ajax(request=request):
+
+        filters = request.GET.get('filter')  
+        print(filters)
+
+
+        comments_list = Comment.objects.filter(texte__contains=filters).order_by('id')
+
+    else : 
+        print("hellooooo world 2333333.")
+
+        comments_list = Comment.objects.get_queryset().order_by('id')
 
     paginator = Paginator(comments_list, 5)
 
@@ -211,7 +204,7 @@ def admin(request):
     context = {"comments" : comments, "dir_list" : dir_list_filters}
     return render(request, 'AppComments/admin.html', context)
 
-
+@login_required
 def upload(request):
 
     file_name = request.GET.get('file_name', None)
@@ -248,14 +241,14 @@ def upload(request):
          
     return JsonResponse({"status":status, "message" : message})
 
-
+@login_required
 def DeleteAll(request):
 
     Comment.objects.all().delete()
     status = "successfuly delete all comments"
     return JsonResponse({"status":status})
 
-
+@login_required
 def delete(request):
 
     # ids = request.GET.getlist('ids[]')
@@ -266,6 +259,14 @@ def delete(request):
 
     return JsonResponse({"status":"success"})
 
+
+
+def filtering(request, id):
+
+    comment_list = Comment.objects.filter(texte__contains="femme")
+
+    return render(request, 'AppComments/admin.html', context)
+    
 
 
 @login_required

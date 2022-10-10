@@ -1,0 +1,68 @@
+{% for comment in comments %}
+
+                <li class="list-group-item" style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 1px; background-color: rgb(248, 248, 248); " id="{{comment.id}}">
+                    <!-- Custom content-->
+                    <div class="media align-items-lg-center flex-column flex-lg-row p-4">
+                        <div class="media-body order-2 order-lg-1 text-center">
+                            <h3 class="mt-0  mb-3 " style="color: #E91E63;">{{comment.categorie}}</h3>
+                            <p class="font-italic mb-0 font-weight-bold" style="font-size: 15px;">
+                             
+                              {% if comment.texte|length|get_digit:"-1" > 80 %}
+                                {{comment.texte|truncatechars:60}}
+                                <button type="button" class="btn btn-link btrm " style="color: blue;"
+                                onclick='LirePlus( "{{comment.texte}}" , "{{comment.categorie}}",  );'>
+                                  lire plus
+                                </button>
+                              {% else %}
+                                {{comment.texte}}
+                              {% endif %}
+
+                            </p>
+                            <div class="d-flex align-items-center row row-cols-1 row-cols-md-2 row-cols-lg-4  mt-4"  >
+
+
+                                <div class="col align-self-center">
+
+                                   <h6 class="text-muted my-1 "  >Vote Haineux : {{comment.haineux}}</h6>
+                                  
+                                </div>
+
+                                <div class="col mx-auto">
+
+                                   <h6 class="text-muted my-1"  >Vote Offensif : {{comment.offensif}}</h6>
+                                  
+                                </div>
+
+                                <div class="col mx-auto">
+
+                                   <h6 class="text-muted my-1"  >Vote Normal : {{comment.non_offensif}}</h6>
+                                  
+                                </div>
+
+                                <div class="col mx-auto">
+
+                                   <h6 class="  my-1 font-italic" style="color: #E91E63;">Vote Final : {{comment.vote_final}}</h6>
+                                  
+                                </div>
+
+                                
+                                <div class="col mx-auto" style="margin-top: 25px;">
+
+                                  <button type="button" class="btn btn-sm btn-outline-info font-italic"  style="width: 45%" 
+                                   onclick='detail(  "{{comment.texte}}" , 
+                                      "{{comment.id}}",
+                                    "{{comment.post_titre}}",
+                                    "{{comment.post_url}}", 
+                                    "{{comment.categorie}}",  );'>
+                                      Détails
+                                    </button>     
+                                    <button type="button" class="btn btn-sm btn-outline-danger font-italic"  style="width: 45%; margin-left: 15px;"  onclick='deleteItem("{{comment.id}}",);'>
+                                      Supprimer
+                                    </button> 
+
+                                </div>
+                                                             
+                            </div>
+                    </div> <!-- End -->
+                </li> <!-- End -->
+        {% endfor %}

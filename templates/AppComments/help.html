@@ -15,5 +15,94 @@
 
 {% include '_partials/header.html' %} 
 
+	 
+
+		<div class="container">
+
+
+			 
+			
+			<div class="row" style="border-bottom: 1px solid rgba(0, 0, 0, 0.3); ">
+				
+				<div class="col"> <h4> Notre Objectif </h4> </div>
+			</div>
+
+			<div class="row" >
+
+				<div class="col">
+
+					<p class="font-italic"> Notre objectif est de pouvoir construire un outil qui permettra de réagir automatiquement aux messages haineux au cour d'une conversation numérique. Pour le faire, nous utliserons une approche machine learning , sans trop vouloir entré dans les détails, disons simplement que pour pouvoir détecter et réagir automatiquement aux messages à caractaire haineux, nous avons besoin de données déjà labellisés. C'est à dire un ensemble assez volumineux de commentaires ou de messages que nous savons déjà à caractére haineux ou pas, qu'on va utiliser pour construire notre outil qui pourra par la suite détecter et réagir tout seul fac à un tel commentaire ou message. Il existe bien déja des données semblable mais ils sont trés rarement en français et peut etre pas adapter au contexte, car les expressions française employées par exemple en France sont différentes de celles employées en afrique ou spécifiquement au Cameroun.    </p>
+					
+				</div>
+				
+			</div>
+
+			<div class="row"  style="border-bottom: 1px solid rgba(0, 0, 0, 0.3); margin-top: 25px;" >
+				<div class="col"> <h4> Comment vous allez nous aider </h4> </div>
+				
+			</div>
+			<div class="row" >
+
+				<div class="col">
+
+					 <p class="font-italic"> Pour faire simple, il s'agit là d'un probléme de machine learning plus précisement d'un probléme d'apprentissage supervisé.  Et donc nous nous sommes déjà charger d'obtenir les commentaires par des procédecés dont nous vous épargnons les détails. Et nous avons donc besoin de votre aide pour nous aider à les labellisé.   </p>
+
+				 <p class="font-italic"> Nous procéderons donc comme suit :  <br>
+
+				 	1. On vous affiche un message, par exemple "je vais bien"<br>
+				 	2. Chaque message est accompagné de trois bouttons (
+				 	<img class=" " id="norImg-{{comment.id}}" src= {% static 'img/furious-2.png' %}  style="width: 2%" /> 
+				 	<img class=" " id="norImg-{{comment.id}}" src= {% static 'img/colere.jpg' %}  style="width: 2%" /> 
+				 	<img class=" " id="norImg-{{comment.id}}" src= {% static 'img/smiling.jpg' %}  style="width: 2%" /> ) désignant respectivement "haineux", "offensif" et "normal" <br>
+				 	3. Si vous pensez que le commentaire peut engendrer de la haine vous cliquez sur <img class=" " id="norImg-{{comment.id}}" src= {% static 'img/furious-2.png' %}  style="width: 2%" />  , si vous pensez qu'il est juste offensant vous cliquez sur <img class=" " id="norImg-{{comment.id}}" src= {% static 'img/colere.jpg' %}  style="width: 2%" /> , si ni l'un ni l'autre, vous cliquez sur 	<img class=" " id="norImg-{{comment.id}}" src= {% static 'img/smiling.jpg' %}  style="width: 2%" /> <br>
+				 	4. Les commentaires seront affichés par vagues d'au plus 9, une fois que vous aurez fini avec une vague, vous devez impérativement appuyer sur le boutton enregister. Vous pourez ensuite continuer avec la vague suivante quand bon vous semblera. <strong> Il est important de vous dire qu'il s'agit d'un vote, et qu'une fois enregistrer vous ne pouvez pas y revenir . </strong>   <br>
+ 	 
+				 </p>
+
+				 <p class="font-italic">  Vous vous etes surement posez la question: " C'est quoi un message <strong> haineux? , Offensif ? ou normal ? </strong> Et bien il s'agit là des questions qui font vraiment débat dans le monde car il existe pas de définition standart ou universelle, néamoins des organismes comme l'ONU y sont interessés. Nous en parlons à la derniére section.  </p>
+					
+
+				</div>
+				
+			</div>
+
+			<div class="row" style="border-bottom: 1px solid rgba(0, 0, 0, 0.3);  margin-top: 25px;">
+
+				<div class="col">
+
+				<h4> Message Haineux , Offensif </h4>
+
+				</div>
+					
+			</div>
+
+			<div div class="row"   >
+
+				<div class="col" >
+				 <p class="font-italic">   <strong>L’ONU définit le discours de haine </strong> comme 'tout type de communication, qu’il s’agisse d’expression orale ou écrite ou de comportement, constituant une atteinte ou utilisant un langage péjoratif ou discriminatoire à l’égard d’une personne ou d’un groupe en raison de leur identité, en d’autres termes, de l’appartenance religieuse, de l’origine ethnique, de la nationalité, de la race, de la couleur de peau, de l’ascendance, du genre ou d’autres facteurs constitutifs de l’identité ' </p>
+
+				  <p class="font-italic">  Donc étant donné cette définition, l'on par exemple : <br><br>
+
+				  	1. Un message comme <strong> " Dans cette région il sont tous bizare " </strong> est un message haineux condané par l'ONU donc l'on clique sur <img   src= {% static 'img/furious-2.png' %}  style="width: 2%" /> <br><br>
+				  	2. Par contre un message comme <strong> "Il sont bizare" </strong> est un message jugé Offensif et qui peut ne pas etre condanable, l'on clique sur <img src= {% static 'img/colere.jpg' %}  style="width: 2%" /> <br><br>
+				  	3. Pour la cas particulier de notre expérience, si l'on a aucun des cas ci dessus alors le message est labellisé normal <img   src= {% static 'img/smiling.jpg' %}  style="width: 2%" />.
+				   </p>
+				</div>
+
+
+				</div>	
+				
+
+			</div>
+			
+
+				
+
+		<footer id="footer-content" style=" margin-top: 40px; left: 0; text-align: center; width: 100%;">
+			<small>Copyright &copy; Donald O.</small>
+		</footer>
+
+
+
 
 {% endblock %}

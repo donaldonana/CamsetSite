@@ -107,15 +107,55 @@ $(document).ready(function () {
   }
 
 
+function filters(){
+
+    var texte = $('#filter').val()
+
+    if (texte != "") {
+
+      $.ajax({
+
+                    data : {"filter" : texte },
+                    url: 'admin',
+                    // on success
+                    success: function(response) { 
+                        // alert("succes");  
+                        //  window.setTimeout(function () {
+                        //     window.location.href = '';
+                        // }, 0);
+
+                    },
+                    // on error
+                    error: function(response) {
+                        // alert the error if any error occured
+                        console.log(response.responseJSON.errors)
+                    }
+                });
+
+
+    }
+
+    else {
+
+      $('#filter').css({
+                             
+          'border-color': 'red',
+        });
+    }
+    
+ 
+
+}
+
 function logout(){
 
     window.setTimeout(function () { window.location.href = 'auth/logout_user'; }, 0);
 
 };
 
-function listResult(){ 
+function stats(){ 
 
-  window.setTimeout(function () { window.location.href = '/list_result'; }, 0);
+  window.setTimeout(function () { window.location.href = '/stats'; }, 0);
 
 };
 

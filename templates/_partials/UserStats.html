@@ -1,41 +1,31 @@
 
   {% load static %}
 
-<!--   <div class="row d-flex align-items-center justify-content-center  " style="margin-bottom: 5px; margin-top: 10px;  ">
-    <div class="col-lg-6 col-sm-12  align-self-center forcanvas"  >
-
-    <h4 class="font-italic"  > STATISTIQUES DE VOS VOTES </h4>
-
-
-    </div>
-
-    <div class="col-lg-6  col-sm-12 align-self-center forcanvas" >
-
-    <h4 class="font-italic"> STATISTIQUES GlOBAL  </h4>
-
-
-    </div>
-
-  </div> -->
-
+ 
 <div class="row d-flex align-items-center justify-content-center  " style="margin-bottom: 25px; margin-top: 10px;  ">
     <div class="col-lg-6 col-sm-12 align-self-center forcanvas">
 
 
 
-     <canvas id="myChart" width="20" height="20" class="align-self-center justify-content-center" style="">
+     <canvas id="myChart" width="20" height="20" class="align-self-center justify-content-center" data-user = "{{user_vote}}" data-total = "{{nbr_texte}}">
           
       </canvas>  
 
 
     </div>
 
-    <div class="col-lg-6 col-sm-12 align-self-center forcanvas" style="margin-top: 20px;" >
+    <div class="col-lg-6 col-sm-12 align-self-center forcanvas" style=" height: 100%" >
 
-    <h4 class="font-italic"  > Total Commentaires : 15 </h4>
-    <h4 class="font-italic"  > Voté haineux : 20 </h4>
-    <h4 class="font-italic"  > Voté offensif : 25 </h4>
-    <h4 class="font-italic"  > Voté normal : 17 </h4>
+       <h5 class=" text-muted" style="font-size: 14px;">STATISTIQUES GLOBAL</h5>
+
+    <h4 class="font-italic"  > Total Commentaires : {{nbr_texte}} </h4>
+    <h4 class="font-italic"  > Nombre catégorie : {{nbr_cat}}  </h4>
+    {% if user.is_superuser %}
+    <h4 class="font-italic"  > Votés haineux : {{haineux__sum}} </h4>
+    <h4 class="font-italic"  > Votés offensif : {{offensif__sum}}  </h4>
+    <h4 class="font-italic"  > Votés normal : {{non_offensif__sum}}  </h4>
+    {% endif %}
+
 
 
 
@@ -44,37 +34,20 @@
 </div>
 
 
-
-
-    
-   
  
-    <!-- <div class="col-lg-12 d-flex  align-self-center justify-content-center forcanvas " style=" text-align:center;" >
- 
-        <canvas id="myChart" width="20" height="20" class="align-self-center justify-content-center" style="">
-          
-        </canvas>
-     
-    </div>
- -->
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 	<script type="text/javascript">
-		// d3.csv("https://github.com/ccodwg/Covid19Canada/raw/master/official_datasets/qc/qc_testing_datasets_prov.csv", function(data) {
-  //   console.log(data);
-  //   });
+	 $(document).ready(function () {
+
+
+  
+
+  vote_user =  $('#myChart').data("user");
+  total =  $('#myChart').data("total");
+  pour_vote = (vote_user / total).toFixed(2);
+
 
 const ctx = document.getElementById('myChart').getContext('2d');
 Chart.register(ChartDataLabels);
@@ -83,7 +56,7 @@ const myChart = new Chart(ctx, {
   data: {
     datasets: [
       {
-        data: [99.999, 0.001],
+        data: [100-pour_vote, pour_vote],
         backgroundColor: [ 'rgb(255, 99, 132)', 'rgb(255, 159, 64)'],
       },
     ],
@@ -91,7 +64,7 @@ const myChart = new Chart(ctx, {
   },
   options: {
     plugins: {
-    	title: {
+      title: {
                 display: true,
                 text: 'STATISTIQUES DE VOS VOTES'
                 // font-size:  20px;
@@ -127,4 +100,9 @@ $("#changedata").on("click", function() {
     myChart.update();
 });
  
+
+
+              
+});
+
 	</script>

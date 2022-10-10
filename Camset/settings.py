@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import django_heroku
+import djongo
 from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -83,10 +84,29 @@ WSGI_APPLICATION = 'Camset.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+           'ENGINE': os.environ.get("NOSQL_ENGINE", "djongo"),
+           
+           'CLIENT': {
+                'host': 'mongodb+srv://donaldonana:nanojunior92@cluster0.clm4i.mongodb.net/Camset?retryWrites=true&w=majority',
+                'name' : 'Camset',
+                'username': 'donaldonana',
+                'password': 'nanojunior92',
+                'uuidRepresentation': 'standard',
+                'authMechanism': 'SCRAM-SHA-1'
+            },
+            'ENFORCE_SCHEMA': False
+       } 
+
+    # 'default': {
+    #        'ENGINE': 'djongo',
+    #        'NAME': 'test',
+    #    }
 }
 
 
