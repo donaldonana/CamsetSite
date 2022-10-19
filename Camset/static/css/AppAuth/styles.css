@@ -2,17 +2,7 @@
 
 
 
-/** {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-}*/
-
-body {
-  /*background: #e35869;*/
-  /*font-family: 'Rubik', sans-serif;*/
-}
+ 
 
 .login-form {
   background: #fff;
@@ -399,7 +389,7 @@ form.sign-in-form {
   }
   .signin-signup {
     width: 100%;
-    top: 118%;
+    top: 122%;
     transform: translate(-50%, -100%);
     transition: 1s 0.8s ease-in-out;
   }

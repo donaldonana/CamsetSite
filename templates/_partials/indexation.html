@@ -1,7 +1,8 @@
 
 {% if comments.has_other_pages %}
 
-<div class="row" style="margin-left: 90px;">
+<div class="row d-flex align-items-center justify-content-center" style="margin-left: 90px;">
+  
 <nav aria-label="Page navigation example">
   <ul class="pagination">
     {% if comments.has_previous %}
@@ -82,5 +83,18 @@
  
   </ul>
 </nav>
+
+<div class="col">
+
+  <label for="quantity">Aller à la page (Entre 1 et {{comments.paginator.num_pages}}):</label>
+  <input type="number" id="quantity" name="quantity" min="1" max="5" style="width: 10%">
+  <button type="button" class="btn btn-sm btn-outline-info font-italic"  style="width: 10%" 
+                                   onclick='GoTo()'>
+                                      Envoyer
+                                    </button> 
+    
+  </div>
+
+  
 </div>
 {% endif %}

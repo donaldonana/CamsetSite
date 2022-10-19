@@ -178,7 +178,13 @@ function help(){
 };
 
 
- 
+function GoTo(){
+  
+  // alert($('#quantity').val());
+  window.setTimeout(function () { window.location.href = '/stats?page='+ $('#quantity').val(); }, 0);
+
+
+};
 
 
 
