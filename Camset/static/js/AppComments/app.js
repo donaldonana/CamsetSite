@@ -5,6 +5,8 @@ $(document).ready(function () {
 
   // $.each( $('p[id^=text-]') 
 
+ 
+
 
   $.mynamespace = {};
   $.mynamespace.myVar = [];

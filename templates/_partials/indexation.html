@@ -1,11 +1,11 @@
 
 {% if comments.has_other_pages %}
 
-<div class="d-flex align-items-center row text-align-center " style="margin-left: 60px;">
+<div class="row d-flex justify-content-center "  >
  
   
-<nav aria-label="Page navigation example" id="pagination" data-page = "{{comments.paginator.num_pages}}"
-data-next = "{{comments.next_page_number}}">
+<nav aria-label="Page navigation example" id="pagination" data-page = "{{nbr_page}}"
+data-next = "{{comments.next_page_number}}" class="d-flex justify-content-center">
   <ul class="pagination">
     {% if comments.has_previous %}
 
@@ -39,14 +39,14 @@ data-next = "{{comments.next_page_number}}">
         <li class="page-item active"><a class="page-link"  href="?page={{ 1 }}">{{ 1 }}</a></li>
        <li class="page-item"><a class="page-link"  href="?page={{ 2}}">{{ 2 }}</a></li>
       <li class="page-item"><span>...</span></li>
-      <li class="page-item"><a class="page-link"  href="?page={{comments.paginator.num_pages}}">{{comments.paginator.num_pages}}</a></li>
+      <li class="page-item"><a class="page-link"  href="?page={{nbr_page}}">{{nbr_page}}</a></li>
 
 
-      {% elif comments.number == comments.paginator.num_pages %}
+      {% elif comments.number == nbr_page %}
         <li class="page-item"><a class="page-link"  href="?page={{ 1 }}">{{ 1 }}</a></li>
       <li class="page-item"><span>...</span></li>
         
-      <li class="page-item active"><a class="page-link"  href="?page={{comments.paginator.num_pages}}">{{comments.paginator.num_pages}}</a></li>
+      <li class="page-item active"><a class="page-link"  href="?page={{nbr_page}}">{{nbr_page}}</a></li>
 
 
 
@@ -57,7 +57,7 @@ data-next = "{{comments.next_page_number}}">
       <li class="page-item active"><a class="page-link"  href="?page={{ i }}">{{ comments.number }}</a></li>
       <li class="page-item"><span>...</span></li>
        
-      <li class="page-item"><a class="page-link"  href="?page={{comments.paginator.num_pages}}">{{comments.paginator.num_pages}}</a></li>
+      <li class="page-item"><a class="page-link"  href="?page={{nbr_page}}">{{nbr_page}}</a></li>
 
 
       {% endif %}

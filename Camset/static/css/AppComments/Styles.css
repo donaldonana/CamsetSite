@@ -159,17 +159,36 @@ a {
 .forcanvas {
     width: 50%;
   }
+
+.quantity{
+
+  width: 10%;
+}
+
+   
 }
 
 @media only screen and (max-width: 768px) {
+  /* For phone: */
  .forcanvas {
     width: 70%;
   }
+
+  .quantity{
+
+   width: 18%;
+  }
+ 
 }
 
 @media only screen and (min-width: 768px) {
   /* For desktop: */
  .forcanvas {
     width: 25%;
+  }
+
+  .quantity{
+
+   width: 6%
   }
 }

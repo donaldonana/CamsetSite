@@ -51,14 +51,16 @@ def index(request):
 
     try:
         comments = paginator.page(page)
+        nbr_page =  comments.paginator.num_pages - 1
     except PageNotAnInteger:
         comments = paginator.page(page)
     except EmptyPage:
         comments = paginator.page(paginator.num_pages)
 
+    
+
      
-     
-    context = {'comments': comments}
+    context = {'comments': comments, 'nbr_page' : nbr_page}
     context['user'] = request.user
     return render(request, 'AppComments/index.html', context)
 
@@ -133,13 +135,15 @@ def stats(request):
 
     try:
         comments = paginator.page(page)
+        nbr_page =  comments.paginator.num_pages - 1
     except PageNotAnInteger:
         comments = paginator.page(page)
     except EmptyPage:
         comments = paginator.page(paginator.num_pages)
  
 
-    context = {'comments': comments}
+    context = {'comments': comments, 'nbr_page' : nbr_page}
+     
 
     var = Comment.objects.all().aggregate(Sum('haineux'))
     context['haineux__sum'] = var['haineux__sum']

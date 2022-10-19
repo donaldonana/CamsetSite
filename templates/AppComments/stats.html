@@ -131,19 +131,19 @@
   <!-- read more popup box end -->
 
 {% include '_partials/indexation.html' %} 
-<div class=" d-flex align-items-center row  " style="margin-left: 50px;">
-  <div class="col-12">
+<div class="row  justify-content-center" style="margin-bottom: 35px; background-color: ;" >
 
-    <label for="quantity">Aller à la page (Entre 1 et {{comments.paginator.num_pages}}):</label>
-  <input type="number" id="quantity" name="quantity" min="1" max="23"  > 
-      <button type="button" class="btn btn-sm btn-outline  font-italic"  id="GoTo"  onclick='GoTo("stats")'  >
-        Go To
-  </button> 
- 
+  <div class=" d-flex justify-content-center" style="text-align: center">
+
+    <label for="quantity" style="">Aller à la page (Entre 1 et {{nbr_page}}):</label>
+    <input type="number"  class="quantity" id="quantity" name="quantity" min="1" max="23" value = {{comments.number}}   style="   height: 70% ; text-align: center; margin-left: 10px"> 
+    <button type="button" class="btn btn-sm btn-outline  font-italic"  id="GoTo"  onclick='GoTo("")'   style=" width: 5%; height: 80% ; text-align: left; margin-left: 8px"> <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+    </button> 
     
-</div>
-</div>
+  </div>
+ 
 
+</div>
 
 
 
