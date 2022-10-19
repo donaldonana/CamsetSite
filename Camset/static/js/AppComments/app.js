@@ -63,29 +63,29 @@ $(document).ready(function () {
 
               
 
-              function save(){ 
+  function save(next_page){ 
 
-                $.ajax({
+       $.ajax({
 
-                    data : {"items" : $.mynamespace.myVar },
-                    url: 'save',
+            data : {"items" : $.mynamespace.myVar },
+            url: 'save',
                     // on success
-                    success: function(response) { 
-                        // alert("succes");  
-                         window.setTimeout(function () {
-                            window.location.href = '/';
-                        }, 0);
+             success: function(response) { 
+                 // alert("succes");  
+              window.setTimeout(function () {
+            window.location.href = '/?page='+ next_page;
+             }, 0);
 
-                    },
-                    // on error
-                    error: function(response) {
-                        // alert the error if any error occured
-                        console.log(response.responseJSON.errors)
-                    }
-                });
+               },
+         // on error
+         error: function(response) {
+               // alert the error if any error occured
+            console.log(response.responseJSON.errors)
+           }
+         });
 
-                return false;
-              };
+        return false;
+    };
 
   function cancel(){
 
@@ -178,11 +178,28 @@ function help(){
 };
 
 
-function GoTo(){
+function GoTo(path){
   
   // alert($('#quantity').val());
-  window.setTimeout(function () { window.location.href = '/stats?page='+ $('#quantity').val(); }, 0);
+  var idx = $('#quantity').val() ;
+  var totalpage =  $('#pagination').data("page");
 
+
+  if (idx != "") {
+
+    if (idx > totalpage) {
+    alert("Choisir un entier dans l'interval demandé");
+  }
+  else
+  {
+     window.setTimeout(function () { window.location.href = '/'+ path + '?page='+ $('#quantity').val(); }, 0);
+
+  }
+
+
+  }
+
+  
 
 };
 

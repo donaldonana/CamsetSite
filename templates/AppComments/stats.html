@@ -131,6 +131,18 @@
   <!-- read more popup box end -->
 
 {% include '_partials/indexation.html' %} 
+<div class=" d-flex align-items-center row  " style="margin-left: 50px;">
+  <div class="col-12">
+
+    <label for="quantity">Aller à la page (Entre 1 et {{comments.paginator.num_pages}}):</label>
+  <input type="number" id="quantity" name="quantity" min="1" max="23"  > 
+      <button type="button" class="btn btn-sm btn-outline  font-italic"  id="GoTo"  onclick='GoTo("stats")'  >
+        Go To
+  </button> 
+ 
+    
+</div>
+</div>
 
 
 
