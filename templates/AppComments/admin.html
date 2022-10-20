@@ -27,24 +27,54 @@
     </div>
   </div>
 
- {% include '_partials/filtre.html' %} 
+ <!-- {% include '_partials/filtre.html' %}  -->
 
 {% if comments %}
+
+
+      {% include '_partials/indexation.html' %} 
+  
+   
+<div class="row  justify-content-center" style="margin-top: 10px  ; background-color: ;" >
+
+  <div class=" d-flex justify-content-center" style="text-align: center">
+
+    <label for="quantity" style="">Aller à la page (Entre 1 et {{nbr_page}}):</label>
+    <input type="number"  class="quantity" id="quantity" name="quantity" min="1" max="23" value = {{comments.number}}   style="   height: 90% ; text-align: center; margin-left: 10px"> 
+     
+    
+  </div>
+ 
+
+</div>
+<div class="row  justify-content-center" style="margin-bottom: 35px; background-color: ;" >
+
+  <div class=" d-flex justify-content-center" style="text-align: center">
+
+     
+    <button type="button" class="btn btn-sm btn-outline  font-italic"  id="GoTo"  onclick='GoTo("")'   style=" width: 8%; height: 90% ; text-align: center;  "> <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+    </button> 
+    
+  </div>
+ 
+
+</div>
+
  <div class="row">
-        <div class="col-lg-11 mx-auto">
+        <div class="col-lg-9 mx-auto">
             <!-- List group-->
             <ul class="list-group shadow">
                 <!-- list group item-->
                  {% for comment in comments %}
 
-                <li class="list-group-item" style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 1px; background-color: rgb(248, 248, 248); " id="{{comment.id}}">
+                <li class="list-group-item" style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 1px; background-color: rgb(255, 254, 254); " >
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-4">
                         <div class="media-body order-2 order-lg-1 text-center">
                             <h3 class="mt-0  mb-3 " style="color: #E91E63;">{{comment.categorie}}</h3>
                             <p class="font-italic mb-0 font-weight-bold" style="font-size: 15px;">
                              
-                              {% if comment.texte|length|get_digit:"-1" > 80 %}
+                              {% if comment.texte|length|get_digit:"-1" > 110 %}
                                 {{comment.texte|truncatechars:60}}
                                 <button type="button" class="btn btn-link btrm " style="color: blue;"
                                 onclick='LirePlus( "{{comment.texte}}" , "{{comment.categorie}}",  );'>
@@ -85,7 +115,7 @@
                                 
                                 <div class="col mx-auto" style="margin-top: 25px;">
 
-                                  <button type="button" class="btn btn-sm btn-outline-info font-italic"  style="width: 45%" 
+                                  <button type="button" class="btn btn-sm btn-outline-info font-italic"  style="width: 35%" 
                                    onclick='detail(  "{{comment.texte}}" , 
                                       "{{comment.id}}",
                                     "{{comment.post_titre}}",
@@ -93,7 +123,7 @@
                                     "{{comment.categorie}}",  );'>
                                       Détails
                                     </button>     
-                                    <button type="button" class="btn btn-sm btn-outline-danger font-italic"  style="width: 45%; margin-left: 15px;"  onclick='deleteItem("{{comment.id}}",);'>
+                                    <button type="button" class="btn btn-sm btn-outline-danger font-italic"  style="width: 45%; margin-left: 10px;"  onclick='deleteItem("{{comment.id}}",);'>
                                       Supprimer
                                     </button> 
 
@@ -130,7 +160,7 @@
 
 
  
-{% include '_partials/indexation.html' %} 
+<!-- {% include '_partials/indexation.html' %}  -->
 
 
  

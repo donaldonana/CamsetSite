@@ -189,6 +189,7 @@ def admin(request):
 
     try:
         comments = paginator.page(page)
+        nbr_page =  comments.paginator.num_pages - 1
     except PageNotAnInteger:
         comments = paginator.page(page)
     except EmptyPage:
@@ -205,7 +206,7 @@ def admin(request):
             pass
         else:
             dir_list_filters.append(e)
-    context = {"comments" : comments, "dir_list" : dir_list_filters}
+    context = {"comments" : comments, "dir_list" : dir_list_filters, 'nbr_page' : nbr_page}
     return render(request, 'AppComments/admin.html', context)
 
 @login_required
