@@ -18,13 +18,12 @@
 
 <div class="container">
 
- {% include '_partials/UserStats.html' %} 
 
 
-  <div class="row d-flex align-items-center justify-content-center  " style="margin-bottom: 10px; margin-top: 50px;">
+  <div class="row d-flex align-items-center justify-content-center  " style="margin-bottom: 10px; margin-top: 10px;">
     <div class="col-lg-12  align-self-center">
 
-    <h4 class="font-italic text-muted"  style="display: inline;"> STATISTIQUES INDIVIDUELLES DE VOTES </h4> <!--  <img src= {% static 'img/add.png' %}  style="width: 2%" />    -->
+    <h4 class="font-italic text-muted"  style="display: inline;"> STATISTIQUES INDIVIDUELLES PAR VOTES </h4> <!--  <img src= {% static 'img/add.png' %}  style="width: 2%" />    -->
 
       
     </div>
@@ -36,14 +35,42 @@
   
 
 {% if comments %}
- <div class="row" style="margin-top: 35px;">
-        <div class="col-lg-11 mx-auto">
+
+{% include '_partials/indexation.html' %} 
+<div class="row  justify-content-center" style="margin-top: 10px  ; background-color: ;" >
+
+  <div class=" d-flex justify-content-center" style="text-align: center">
+
+    <label for="quantity" style="">Aller à la page (Entre 1 et {{nbr_page}}):</label>
+    <input type="number"  class="quantity" id="quantity" name="quantity" min="1" max="23" value = {{comments.number}}   style="   height: 80% ; text-align: center; margin-left: 10px"> 
+     
+    
+  </div>
+ 
+
+</div>
+<div class="row  justify-content-center" style="margin-bottom: 35px; background-color: ;" >
+
+  <div class=" d-flex justify-content-center" style="text-align: center">
+
+     
+    <button type="button" class="btn btn-sm btn-outline  font-italic"  id="GoTo"  onclick='GoTo("")'   style=" width: 8%; height: 90% ; text-align: center;  "> <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+    </button> 
+    
+  </div>
+ 
+
+</div>
+
+
+ <div class="row" style="margin-top: 45px; margin-bottom: 75px;">
+        <div class="col-lg-9 mx-auto">
             <!-- List group-->
             <ul class="list-group shadow">
                 <!-- list group item-->
                  {% for comment in comments %}
 
-                <li class="list-group-item" style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 1px; background-color: rgb(248, 248, 248); " >
+                <li class="list-group-item" style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 1px; background-color: rgb(255, 254, 254); " >
                     <!-- Custom content-->
                     <div class="media align-items-lg-center flex-column flex-lg-row p-4">
                         <div class="media-body order-2 order-lg-1 text-center">
@@ -130,20 +157,8 @@
    </div>
   <!-- read more popup box end -->
 
-{% include '_partials/indexation.html' %} 
-<div class="row  justify-content-center" style="margin-bottom: 35px; background-color: ;" >
 
-  <div class=" d-flex justify-content-center" style="text-align: center">
-
-    <label for="quantity" style="">Aller à la page (Entre 1 et {{nbr_page}}):</label>
-    <input type="number"  class="quantity" id="quantity" name="quantity" min="1" max="23" value = {{comments.number}}   style="   height: 70% ; text-align: center; margin-left: 10px"> 
-    <button type="button" class="btn btn-sm btn-outline  font-italic"  id="GoTo"  onclick='GoTo("")'   style=" width: 5%; height: 80% ; text-align: left; margin-left: 8px"> <i class="fa fa-search fa-lg" aria-hidden="true"></i>
-    </button> 
-    
-  </div>
  
-
-</div>
 
 
 
@@ -157,8 +172,12 @@
     </div>
  {% endif %}
 
+ {% include '_partials/UserStats.html' %} 
+
 
 </div>
+
+
 
 
 
