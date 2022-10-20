@@ -185,22 +185,28 @@ function GoTo(path){
   // alert($('#quantity').val());
   var idx = $('#quantity').val() ;
   var totalpage =  $('#pagination').data("page");
+  const reg = new RegExp('^[0-9]+$');
 
 
-  if (idx != "") {
+  if (reg.test(idx)) {
 
-    if (idx > totalpage) {
-    alert("Choisir un entier dans l'interval demandé");
+      if (idx != "") {
+
+        if (idx > totalpage) {
+          alert("Choisir un entier dans l'interval précisé");
+        }
+        else
+        {
+          window.setTimeout(function () { window.location.href = '/'+ path + '?page='+ $('#quantity').val(); }, 0);
+        }
+      }
   }
-  else
+
+  else 
   {
-     window.setTimeout(function () { window.location.href = '/'+ path + '?page='+ $('#quantity').val(); }, 0);
-
+    alert("Entrer un entier dans l'interval précisé");
   }
-
-
-  }
-
+  
   
 
 };

@@ -24,7 +24,7 @@
 
 
       {% if comments %}
-      
+
       {% include '_partials/indexation.html' %} 
   
    
@@ -73,7 +73,9 @@
               </div>
               <div class="card-body">
 
-                 {% if comment.texte|length|get_digit:"-1" > 120 %}   
+                <div>
+
+                  {% if comment.texte|length|get_digit:"-1" > 120 %}   
                     <p class="card-text" id="text-{{comment.id}}">{{comment.texte|truncatechars:120}}
                       <button type="button" class="btn btn-link btrm " style="color: blue;"
                       onclick='LirePlus( "{{comment.texte}}" , "{{comment.categorie}}",  );'>
@@ -84,18 +86,48 @@
                   {% else %}
                     <p class="card-text" id="text-{{comment.id}}">{{comment.texte}}</p>          
                   {% endif %}
+                     
+                </div>
 
-                <span class="bad" style="cursor: pointer;" onclick="FuriousCall({{comment.id}});" > 
-                 <img  class=" "  id="furImg-{{comment.id}}" src= {% static 'img/furious-2.png' %}  style="width: 10%" /> 
-               </span>
+                 
 
-                <span role="button" aria-pressed="true"    style="margin-right: 5px; margin-left: 10px; cursor: pointer;" onclick="BadCall({{comment.id}});" > 
-                  <img   class=" " id="badImg-{{comment.id}}" src= {% static 'img/colere.jpg' %}  style="width: 10%" /> 
+                <div class="row" style="margin-top: 20px">
+                  <div class="col-4" style="text-align: right;>
+
+                    <span class="bad" style="cursor: pointer;" onclick="FuriousCall({{comment.id}});" > 
+                 <img  class=" "  id="furImg-{{comment.id}}" src= {% static 'img/furious-2.png' %}  style="width: 35%" /> 
+                  <figcaption style="font-size: 11px" class="font-italic">Haineux</figcaption>
+
+
                 </span>
+                    
+                  </div>
+                  <div class="col-4">
 
-                <span role="button" aria-pressed="true"   style="cursor: pointer" onclick="NormalCall({{comment.id}});" > 
-                  <img class=" " id="norImg-{{comment.id}}" src= {% static 'img/smiling.jpg' %}  style="width: 10%" /> 
+                     <span role="button" aria-pressed="true"    style="margin-right: 5px; margin-left: 10px; cursor: pointer;" onclick="BadCall({{comment.id}});" > 
+                  <img   class=" " id="badImg-{{comment.id}}" src= {% static 'img/colere.jpg' %}  style="width: 35%" /> 
+                  <figcaption style="font-size: 11px ;" class="font-italic">Offensif</figcaption>
+
                 </span>
+                    
+                  </div>
+                  <div class="col-4" style="text-align: left;">
+
+                    <span role="button" aria-pressed="true"   style="cursor: pointer" onclick="NormalCall({{comment.id}});" > 
+                  <img class=" " id="norImg-{{comment.id}}" src= {% static 'img/smiling.jpg' %}  style="width: 35%" title="Van Gogh, Self-portrait."/> 
+                  <figcaption style="font-size: 11px" class="font-italic">Normal</figcaption>
+
+
+                </span>
+                    
+                  </div>
+                </div>
+
+                
+
+               
+
+                
 
               </div>
               <div class="card-footer text-muted">
