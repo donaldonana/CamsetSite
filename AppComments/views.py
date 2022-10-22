@@ -41,7 +41,7 @@ def index(request):
              
 
 
-    # random.shuffle(comments_list)
+    random.shuffle(comments_list)
     paginator = Paginator(comments_list, 6)
 
   
@@ -167,18 +167,18 @@ def is_ajax(request):
 @login_required
 def admin(request):
 
-    if is_ajax(request=request):
+    # if is_ajax(request=request):
 
-        filters = request.GET.get('filter')  
-        print(filters)
+        # filters = request.GET.get('filter')  
+        # print(filters)
 
 
-        comments_list = Comment.objects.filter(texte__contains=filters).order_by('id')
+        # comments_list = Comment.objects.filter(texte__contains=filters).order_by('id')
 
-    else : 
-        print("hellooooo world 2333333.")
+    # else : 
+    #     print("hellooooo world 2333333.")
 
-        comments_list = Comment.objects.get_queryset().order_by('id')
+    comments_list = Comment.objects.get_queryset().order_by('id')
 
     paginator = Paginator(comments_list, 6)
 
@@ -222,14 +222,15 @@ def upload(request):
         print(file_name)
         
 
-    except  :
+    except Exception as e  :
 
         status = False
         message = "File not Found"
+        print(e)
          
         return JsonResponse({"status":status, "message" : message})
 
-
+ 
 
     print("-----------begin-----")
     for texte in parsed["commentaires"]:
