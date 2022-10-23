@@ -180,7 +180,7 @@ def admin(request):
 
     comments_list = Comment.objects.get_queryset().order_by('id')
 
-    paginator = Paginator(comments_list, 6)
+    paginator = Paginator(comments_list, 10)
 
   
     request.user.save()
