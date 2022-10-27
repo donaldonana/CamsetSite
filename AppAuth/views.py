@@ -13,7 +13,11 @@ from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeErr
 from django.core.mail import EmailMessage
 from django.conf import settings
 import threading
+from django.http import JsonResponse
+import re
+import itertools
 
+from AppComments.models import Comment
 # Create your views here.
 
 
@@ -141,4 +145,56 @@ def logout_user(request):
     return redirect(reverse('login'))
 
 
+def AddToCheked(request):
+
+    id = request.GET.get('id', None)
+    comment = Comment.objects.get(pk=int(id))
+    request.user.checked.add(comment)
+    request.user.save()
+
+    print(".......",len(request.user.checked.get_queryset()),".......")
+     
+
+
+    return JsonResponse({"status": True, "message" : "Adding"})
+
+
+def MoveToCheked(request):
+
+    id = request.GET.get('id', None)
+    comment = Comment.objects.get(pk=int(id))
+    request.user.checked.remove(comment)
+    request.user.save()
+    print(".......",len(request.user.checked.get_queryset()),".......")
+
+    return JsonResponse({"status": True, "message" : "Adding"})
+
+
+def format(a):
+    # url = re.sub('\.com$', '', url)
+    b = a.removesuffix(']')     
+    b = b.removeprefix('items[][')
+
+    return b
+
+def DeleteChecked(request):
+    num = re.compile('[0-9]+')
+    alpha = re.compile('[a-z]+')
+
+    items = dict(request.GET.items())
+    result = [dict((num.sub('', w[0]), w[1]) for z, w in v) for i, v in itertools.groupby(((alpha.sub('', k), (k, v)) for k, v in items.items()), lambda x: x[0])]
+    final = [dict((format(a), b) for a, b in v.items()) for v in result ]
+ 
+    for item in final:
+
+        try:
+            comment = Comment.objects.get(id = int(item["id"]))
+            comment.delete()
+
+        except Comment.DoesNotExist:
+            pass
+
+ 
+
+    return JsonResponse({"data":"success"})
 

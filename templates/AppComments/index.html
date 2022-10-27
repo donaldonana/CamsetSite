@@ -18,44 +18,53 @@
 
 
   
-  <div class="container">
+<div class="container">
           
 
 
 
       {% if comments %}
 
-      {% include '_partials/indexation.html' %} 
+
+      <div class='pagination-container row d-flex justify-content-center '>
+        <nav  class="d-flex justify-content-center">
+          <ul class="pagination" style="cursor: pointer;">
+            <li data-page="prev"  >
+                <span> &laquo; <span class="sr-only">(current)</span></span>
+            </li>
+           <!-- Here the JS Function Will Add the Rows -->
+            <li data-page="next" id="prev">
+                <span> &raquo; <span class="sr-only">(current)</span></span>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="row  justify-content-center" style="   background-color: ;" >
+        <div class=" d-flex justify-content-center" style="text-align: center">
+          <label for="quantity" style="">Aller à la page (Entre 1 et {{nbr_page}}):</label>
+          
+        </div>
+      </div>
+      <div class="row  justify-content-center" style="margin-bottom: 12px; background-color: ;" >
+        <div class=" d-flex justify-content-center" style="text-align: center"> 
+          <input type="number"  class="quantity d-flex justify-content-center" id="quantity" name="quantity" min="1" max="23" value = {{comments.number}} style=" height: 90% ; text-align: center; ">    
+        </div>
+      </div>
+
+      <div class="row  justify-content-center" style="margin-bottom: 35px; background-color: ;" >
+        <div class=" d-flex justify-content-center" style="text-align: center"> 
+           
+            <i class="fa fa-search fa-lg" id="SearchPage" aria-hidden="true" style="cursor: pointer;"></i>
+         
+        </div>
+      </div>
+
+
+
   
-   
-<div class="row  justify-content-center" style="margin-top: 10px  ; background-color: ;" >
-
-  <div class=" d-flex justify-content-center" style="text-align: center">
-
-    <label for="quantity" style="">Aller à la page (Entre 1 et {{nbr_page}}):</label>
-    <input type="number"  class="quantity" id="quantity" name="quantity" min="1" max="23" value = {{comments.number}}   style="   height: 90% ; text-align: center; margin-left: 10px"> 
-     
     
-  </div>
- 
-
-</div>
-<div class="row  justify-content-center" style="margin-bottom: 35px; background-color: ;" >
-
-  <div class=" d-flex justify-content-center" style="text-align: center">
-
-     
-    <button type="button" class="btn btn-sm btn-outline  font-italic"  id="GoTo"  onclick='GoTo("")'   style=" width: 8%; height: 90% ; text-align: center;  "> <i class="fa fa-search fa-lg" aria-hidden="true"></i>
-    </button> 
-    
-  </div>
- 
-
-</div>
- 
-
-
-    <div class=" row row-cols-1 row-cols-md-2 row-cols-lg-3 service-items">
+    <div class=" row row-cols-1 row-cols-md-2 row-cols-lg-3 service-items" id="items">
 
 
       <!-- <div class=" card-group "></div> -->
@@ -63,18 +72,16 @@
         {% for comment in comments %}
 
           <div class="card-group col">
+
            <div class="card text-center border-.5 mb-3" >
               <div class="card-header">
-  
                 <h3 class="font-italic" >{{comment.categorie}}</h3> 
-
                 <strong><p class="font-italic" id="reponse-{{comment.id}}">  votre réponse : </p> </strong>
-
               </div>
+
               <div class="card-body">
 
                 <div>
-
                   {% if comment.texte|length|get_digit:"-1" > 120 %}   
                     <p class="card-text" id="text-{{comment.id}}">{{comment.texte|truncatechars:120}}
                       <button type="button" class="btn btn-link btrm " style="color: blue;"
@@ -85,49 +92,35 @@
                     
                   {% else %}
                     <p class="card-text" id="text-{{comment.id}}">{{comment.texte}}</p>          
-                  {% endif %}
-                     
+                  {% endif %}    
                 </div>
 
                  
 
                 <div class="row" style="margin-top: 20px">
-                  <div class="col-4" style="text-align: right;>
 
+                  <div class="col-4" style="text-align: right";>
                     <span class="bad" style="cursor: pointer;" onclick="FuriousCall({{comment.id}});" > 
-                 <img  class=" "  id="furImg-{{comment.id}}" src= {% static 'img/furious-2.png' %}  style="width: 35%" /> 
-                  <figcaption style="font-size: 11px" class="font-italic">Haineux</figcaption>
-
-
-                </span>
-                    
+                        <img  class=" "  id="furImg-{{comment.id}}" src= {% static 'img/furious-2.png' %}  style="width: 35%" /> 
+                        <figcaption style="font-size: 11px" class="font-italic">Haineux</figcaption>
+                    </span> 
                   </div>
+
                   <div class="col-4">
-
                      <span role="button" aria-pressed="true"    style="margin-right: 5px; margin-left: 10px; cursor: pointer;" onclick="BadCall({{comment.id}});" > 
-                  <img   class=" " id="badImg-{{comment.id}}" src= {% static 'img/colere.jpg' %}  style="width: 35%" /> 
-                  <figcaption style="font-size: 11px ;" class="font-italic">Offensif</figcaption>
-
-                </span>
-                    
+                        <img   class=" " id="badImg-{{comment.id}}" src= {% static 'img/colere.jpg' %}  style="width: 35%" /> 
+                        <figcaption style="font-size: 11px ;" class="font-italic">Offensif</figcaption>
+                      </span> 
                   </div>
+
                   <div class="col-4" style="text-align: left;">
-
-                    <span role="button" aria-pressed="true"   style="cursor: pointer" onclick="NormalCall({{comment.id}});" > 
-                  <img class=" " id="norImg-{{comment.id}}" src= {% static 'img/smiling.jpg' %}  style="width: 35%" title="Van Gogh, Self-portrait."/> 
-                  <figcaption style="font-size: 11px" class="font-italic">Normal</figcaption>
-
-
-                </span>
-                    
+                    <span role="button" aria-pressed="true"   style="cursor: pointer" onclick="NormalCall({{  comment.id}});" > 
+                      <img class=" " id="norImg-{{comment.id}}" src= {% static 'img/smiling.jpg' %}  style="width: 35%" title="Van Gogh, Self-portrait."/> 
+                      <figcaption style="font-size: 11px" class="font-italic">Normal</figcaption>
+                    </span>  
                   </div>
+
                 </div>
-
-                
-
-               
-
-                
 
               </div>
               <div class="card-footer text-muted">
@@ -139,12 +132,15 @@
                   Plus d'Info
                 </button>
               </div>
-           </div>
+
+            </div>
+
           </div>
 
         {% endfor %}
 
     </div>
+ 
 
 
     
@@ -168,7 +164,7 @@
 
 
 
-    <div class="row align-items-center"  style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 10px; padding-bottom: 15px; margin-top: 40px">
+    <div class="row align-items-center"  style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 10px; padding-bottom: 15px; margin-top: 20px">
 
       <div class="col-lg-3 align-self-center"  >
       </div>
@@ -181,6 +177,7 @@
       </div>
       <div class="col-lg-3 align-self-center"  >
       </div>
+
       
     </div>
 
@@ -211,7 +208,13 @@
 </div>    
 
     
-    {% endblock content %}
+{% endblock content %}
+
+
+{% block add_js %}
+  <script src={% static 'js/AppComments/indexPagination.js' %}></script>
+{% endblock %}
+
 
 
  

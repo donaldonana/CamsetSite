@@ -32,38 +32,15 @@
 {% if comments %}
 
 
-      {% include '_partials/indexation.html' %} 
-  
-   
-<div class="row  justify-content-center" style="margin-top: 10px  ; background-color: ;" >
 
-  <div class=" d-flex justify-content-center" style="text-align: center">
-
-    <label for="quantity" style="">Aller à la page (Entre 1 et {{nbr_page}}):</label>
-    <input type="number"  class="quantity" id="quantity" name="quantity" min="1" max="23" value = {{comments.number}}   style="   height: 90% ; text-align: center; margin-left: 10px"> 
-     
-    
-  </div>
- 
-
-</div>
-<div class="row  justify-content-center" style="margin-bottom: 35px; background-color: ;" >
-
-  <div class=" d-flex justify-content-center" style="text-align: center">
-
-     
-    <button type="button" class="btn btn-sm btn-outline  font-italic"  id="GoTo"  onclick='GoTo("admin")'   style=" width: 8%; height: 90% ; text-align: center;  "> <i class="fa fa-search fa-lg" aria-hidden="true"></i>
-    </button> 
-    
-  </div>
  
 
 </div>
 
  <div class="row">
-        <div class="col-lg-9 mx-auto">
+        <div class="col-lg-8 mx-auto">
             <!-- List group-->
-            <ul class="list-group shadow">
+            <ul class="list-group shadow" id="AdminItem">
                 <!-- list group item-->
                  {% for comment in comments %}
 
@@ -128,7 +105,15 @@
                                     </button> 
 
                                 </div>
+
+                                
                                                              
+                            </div>
+                            <div class="d-flex align-items-center row  "  >
+                               <div class="col-12 mx-auto" style="margin-top: 25px;">
+                                  <input type="checkbox" id="select-{{comment.id}}" name="select" value=" {{comment.id}}"  data-id ="{{comment.id}}">
+                                  <label for="select-{{comment.id}}">Sélectioner</label><br>
+                                </div>
                             </div>
                     </div> <!-- End -->
                 </li> <!-- End -->
@@ -141,33 +126,59 @@
     </div>
 
 
+    <div class="row  justify-content-center" >
+
+      <div class=" d-flex justify-content-center" style="text-align: center">
 
 
-      {% include '_partials/indexation.html' %} 
-  
-   
-<div class="row  justify-content-center" style="margin-top: 10px  ; background-color: ;" >
-
-  <div class=" d-flex justify-content-center" style="text-align: center">
-
-    <label for="quantity" style="">Aller à la page (Entre 1 et {{nbr_page}}):</label>
-    <input type="number"  class="quantity" id="quantity" name="quantity" min="1" max="23" value = {{comments.number}}   style="   height: 90% ; text-align: center; margin-left: 10px"> 
-     
-    
+        <div class="col-12 mx-auto" style="margin-top: 25px;">
+            <button type="button" class="btn btn-sm btn-outline-danger  " onclick='deleteSelectItem();'>
+                Supprimer les commentaires Selectionnées
+            </button>
+        </div>
+        
+      </div>
+                               
   </div>
- 
 
-</div>
-<div class="row  justify-content-center" style="margin-bottom: 35px; background-color: ;" >
 
-  <div class=" d-flex justify-content-center" style="text-align: center">
 
-     
-    <button type="button" class="btn btn-sm btn-outline  font-italic"  id="GoTo"  onclick='GoTo("admin")'   style=" width: 8%; height: 90% ; text-align: center;  "> <i class="fa fa-search fa-lg" aria-hidden="true"></i>
-    </button> 
-    
-  </div>
- 
+      <div class='pagination-container row d-flex justify-content-center '>
+        <nav  class="d-flex justify-content-center">
+          <ul class="pagination" style="cursor: pointer;">
+            <li data-page="prev"  >
+                <span> &laquo; <span class="sr-only">(current)</span></span>
+            </li>
+           <!-- Here the JS Function Will Add the Rows -->
+            <li data-page="next" id="prev">
+                <span> &raquo; <span class="sr-only">(current)</span></span>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="row  justify-content-center" style="   background-color: ;" >
+        <div class=" d-flex justify-content-center" style="text-align: center">
+          <label for="quantity" style="">Aller à la page (Entre 1 et {{nbr_page}}):</label>
+          
+        </div>
+      </div>
+      <div class="row  justify-content-center" style="margin-bottom: 12px; background-color: ;" >
+        <div class=" d-flex justify-content-center" style="text-align: center"> 
+          <input type="number"  class="quantity d-flex justify-content-center" id="quantity" name="quantity" min="1" max="23" value = {{comments.number}} style=" height: 90% ; text-align: center; ">    
+        </div>
+      </div>
+
+      <div class="row  justify-content-center" style="margin-bottom: 35px; background-color: ;" >
+        <div class=" d-flex justify-content-center" style="text-align: center"> 
+           
+            <i class="fa fa-search fa-lg" id="SearchPage" aria-hidden="true" style="cursor: pointer;"></i>
+         
+        </div>
+      </div>
+
+
+          
  
 
           <!-- read more popup box start -->
@@ -302,6 +313,12 @@
 
     
     {% endblock content %}
+
+
+
+{% block add_js %}
+  <script src={% static 'js/AppComments/AdminPagination.js' %}></script>
+{% endblock %}
 
 
  

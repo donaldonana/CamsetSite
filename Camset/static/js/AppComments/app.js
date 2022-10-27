@@ -7,9 +7,9 @@ $(document).ready(function () {
 
  
 
-
   $.mynamespace = {};
   $.mynamespace.myVar = [];
+  $.mynamespace.len = 0 ;
   $.mynamespace.myVar2 = "somethingElse";
 
 
@@ -21,12 +21,23 @@ $(document).ready(function () {
 
   function FuriousCall(id)   { 
 
+     
+
+
+    if ($.mynamespace.len >= 15) {
+
+      alert("Vous avez atteint la limite en Enregistrer ou Annuler vos votes pour pouvoir continuer");
+
+      return false
+    }
+
       $("#btnsave").attr('disabled', false);
       $("#btncancel").attr('disabled', false);
 
 
         var item = { "id" : id, "reponse" : "furieux"};
         $.mynamespace.myVar.push(item);
+        $.mynamespace.len = $.mynamespace.len + 1;
         $(`#reponse-${id}`).text('votre réponse : furieux');
         $(`#furImg-${id}`).addClass('img');
         $(`#badImg-${id}`).removeClass('img');
@@ -36,8 +47,16 @@ $(document).ready(function () {
 
   function BadCall(id) {
 
+    if ($.mynamespace.len >= 15) {
+
+      alert("Vous avez atteint la limite en Enregistrer ou Annuler vos votes pour pouvoir continuer");
+
+      return false
+    }
+
     var item = { "id" : id, "reponse" : "offensif"};
-    $.mynamespace.myVar.push(item);              
+    $.mynamespace.myVar.push(item);      
+    $.mynamespace.len = $.mynamespace.len + 1;
     $(`#reponse-${id}`).text('votre réponse : offensif');
     $(`#furImg-${id}`).removeClass('img');
     $(`#badImg-${id}`).addClass('img');
@@ -51,8 +70,16 @@ $(document).ready(function () {
 
   function NormalCall(id){ 
 
+    if ($.mynamespace.len >= 15) {
+
+      alert("Vous avez atteint la limite en Enregistrer ou Annuler vos votes pour pouvoir continuer");
+
+      return false
+    }
+
     var item = { "id" : id, "reponse" : "normal"};
-    $.mynamespace.myVar.push(item);             
+    $.mynamespace.myVar.push(item); 
+    $.mynamespace.len = $.mynamespace.len + 1;
     $(`#reponse-${id}`).text('votre réponse : normal');
     $(`#furImg-${id}`).removeClass('img');
     $(`#badImg-${id}`).removeClass('img');
@@ -74,9 +101,7 @@ $(document).ready(function () {
                     // on success
              success: function(response) { 
                  // alert("succes");  
-              window.setTimeout(function () {
-            window.location.href = '/?page='+ next_page;
-             }, 0);
+              window.setTimeout(function () {window.location.href = '/' }, 0);
 
                },
          // on error
@@ -106,6 +131,8 @@ $(document).ready(function () {
 
       $("#btnsave").attr('disabled', true);
       $("#btncancel").attr('disabled', true);
+
+      $.mynamespace.myVar = [];
   }
 
 
@@ -178,39 +205,3 @@ function help(){
   window.setTimeout(function () { window.location.href = '/help'; }, 0);
 
 };
-
-
-function GoTo(path){
-  
-  // alert($('#quantity').val());
-  var idx = $('#quantity').val() ;
-  var totalpage =  $('#pagination').data("page");
-  const reg = new RegExp('^[0-9]+$');
-
-
-  if (reg.test(idx)) {
-
-      if (idx != "") {
-
-        if (idx > totalpage) {
-          alert("Choisir un entier dans l'interval précisé");
-        }
-        else
-        {
-          window.setTimeout(function () { window.location.href = '/'+ path + '?page='+ $('#quantity').val(); }, 0);
-        }
-      }
-  }
-
-  else 
-  {
-    alert("Entrer un entier dans l'interval précisé");
-  }
-  
-  
-
-};
-
-
-
-     

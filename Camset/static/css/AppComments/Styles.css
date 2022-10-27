@@ -139,11 +139,11 @@ background-color: #902e07;
 
  
 
-input:checked + label {
+/*input:checked + label {
   text-decoration: line-through;
   color: #adb5bd;
 }
-
+*/
 label {
   cursor: pointer;
 }

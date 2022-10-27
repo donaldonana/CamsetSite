@@ -38,29 +38,17 @@ def index(request):
     for el in comments:
         if el not in comments_user:
             comments_list.append(el)
-             
-
 
     random.shuffle(comments_list)
-    paginator = Paginator(comments_list, 6)
 
-  
-    request.user.save()
+    n = len(comments_list)
 
-    page = request.GET.get('page', 1)
-
-    try:
-        comments = paginator.page(page)
-        nbr_page =  comments.paginator.num_pages - 1
-    except PageNotAnInteger:
-        comments = paginator.page(page)
-    except EmptyPage:
-        comments = paginator.page(paginator.num_pages)
-
-    
+    nbr_page =  n // 6
+    if n% 6 != 0:
+        nbr_page = nbr_page + 1
 
      
-    context = {'comments': comments, 'nbr_page' : nbr_page}
+    context = {'comments': comments_list, 'nbr_page' : nbr_page}
     context['user'] = request.user
     return render(request, 'AppComments/index.html', context)
 
@@ -180,21 +168,11 @@ def admin(request):
 
     comments_list = Comment.objects.get_queryset().order_by('id')
 
-    paginator = Paginator(comments_list, 10)
+    n = len(comments_list)
 
-  
-    request.user.save()
-
-    page = request.GET.get('page', 1)
-
-    try:
-        comments = paginator.page(page)
-        nbr_page =  comments.paginator.num_pages - 1
-    except PageNotAnInteger:
-        comments = paginator.page(page)
-    except EmptyPage:
-        comments = paginator.page(paginator.num_pages)
- 
+    nbr_page =  n // 6
+    if n% 6 != 0:
+        nbr_page = nbr_page + 1
 
     path =  os.path.join(BASE_DIR, 'staticfiles/JsonFiles') 
 
@@ -206,7 +184,8 @@ def admin(request):
             pass
         else:
             dir_list_filters.append(e)
-    context = {"comments" : comments, "dir_list" : dir_list_filters, 'nbr_page' : nbr_page}
+    context = {"comments" : comments_list, "dir_list" : dir_list_filters, 'nbr_page' : nbr_page,
+     "checked": len(request.user.checked.get_queryset())}
     return render(request, 'AppComments/admin.html', context)
 
 @login_required

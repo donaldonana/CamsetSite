@@ -9,6 +9,7 @@ class User(AbstractUser):
     is_email_verified = models.BooleanField(default=False)
     commentaires = models.ManyToManyField(Comment, related_name='commentaires', through='comments')
     index = models.IntegerField(default = 1)
+    checked = models.ManyToManyField(Comment, related_name='checked_comments')
 
     def __str__(self):
         return self.email

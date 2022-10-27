@@ -3,8 +3,13 @@
 
     $body = $("body");
 
+     $.mynamespace = {};
+     $.mynamespace.myVar = [];
+     $.mynamespace.len = 0 ;
+     $.mynamespace.myVar2 = "somethingElse";
+
     $(document).on({
-        ajaxStart: function() { $body.addClass("loading");    },
+         ajaxStart: function() { $body.addClass("loading");    },
          ajaxStop: function() { $body.removeClass("loading"); 
          // $(".alert-success").addClass("show");
 
@@ -14,9 +19,7 @@
          //  }, 4000);
        }    
     });
-      
-  
-      
+
 
 
       $("#myBtn").click(function(){
@@ -78,30 +81,76 @@
         });
 
 
+      $("input[id^='select-']").each(function (i, el) {
+        $(this).change(function() {
+            id = $(this).data("id");
+            var item = { "id" : id};
+            if ( $(this).is(':checked') ) {
+              $.mynamespace.myVar.push(item);
+              $.mynamespace.len = $.mynamespace.len + 1;
+            } 
+            else { 
+
+              $.mynamespace.myVar = $.mynamespace.myVar.filter( obj => obj.id !== id);
+              $.mynamespace.len = $.mynamespace.len - 1;
+
+
+            }
+       });
+
+      });
+
+       
+
+
               
    });
 
 
- function deleteAllItems() {
-    if (confirm("Etes vous sure de vouloir supprimer tous les commentaires?")) {
+//  function deleteAllItems() {
+//     if (confirm("Etes vous sure de vouloir supprimer tous les commentaires?")) {
         
-         $.ajax({
-                    // data: {"file_name" : str },
-                    url: 'DeleteAll',
-                    // on success
-                    success: function(response) {
+//          $.ajax({
+//                     // data: {"file_name" : str },
+//                     url: 'auth/DeleteChecked',
+//                     // on success
+//                     success: function(response) {
 
-                      alert(response.status);
  
-                    },
-                    // on error
-                    error: function(response) {
-                        // alert the error if any error occured
-                        console.log(response.responseJSON.errors)
-                    }
-                });
-    }
-    return false;
+//                     },
+//                     // on error
+//                     error: function(response) {
+//                         // alert the error if any error occured
+//                         console.log(response.responseJSON.errors)
+//                     }
+//                 });
+//     }
+//     return false;
+// }
+
+
+function deleteSelectItem( ) {
+
+
+   $.ajax({
+
+            data : {"items" : $.mynamespace.myVar },
+            url: 'auth/DeleteChecked',
+                    // on success
+             success: function(response) { 
+                 // alert("succes");  
+              window.setTimeout(function () {window.location.href = '/admin' }, 0);
+
+               },
+         // on error
+         error: function(response) {
+               // alert the error if any error occured
+            console.log(response.responseJSON.errors)
+           }
+         });
+
+        return false;
+  
 }
 
 
@@ -137,6 +186,10 @@
     }
     return false;
 };
+
+
+
+ 
 
 
  
