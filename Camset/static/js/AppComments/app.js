@@ -133,6 +133,8 @@ $(document).ready(function () {
       $("#btncancel").attr('disabled', true);
 
       $.mynamespace.myVar = [];
+      $.mynamespace.len = 0 ;
+
   }
 
 
