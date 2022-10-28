@@ -131,6 +131,8 @@
 
 function deleteSelectItem( ) {
 
+  if (confirm(`Etes vous sure de vouloir supprimer  ${$.mynamespace.len} commentaire(s) ? `)) {
+
 
    $.ajax({
 
@@ -150,6 +152,8 @@ function deleteSelectItem( ) {
          });
 
         return false;
+
+  }
   
 }
 

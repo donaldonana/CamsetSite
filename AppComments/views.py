@@ -124,11 +124,16 @@ def stats(request):
 
     # Comment.objects.values_list('haineux', flat=True)
 
-    request.user.vote = len(request.user.commentaires.get_queryset())
     request.user.save()
     comments_list = Comment.objects.get_queryset().order_by('id')
+    # users = list(User.objects.get_queryset().order_by('-vote'))
+
+    # for user in users :
+    #     user.vote = len(user.commentaires.get_queryset())
+    #     user.save()
+
     users = User.objects.get_queryset().order_by('-vote')
-    # rang = [i , for i in range(1, len(user)+1)]
+
 
     paginator = Paginator(comments_list, 6)
 
@@ -182,13 +187,25 @@ def admin(request):
     # else : 
     #     print("hellooooo world 2333333.")
 
-    comments_list = Comment.objects.get_queryset().order_by('id')
+    comments = list(Comment.objects.get_queryset().order_by('id'))
 
-    n = len(comments_list)
 
-    nbr_page =  n // 6
-    if n% 6 != 0:
-        nbr_page = nbr_page + 1
+    random.shuffle(comments)
+
+    paginator = Paginator(comments, 15)
+
+  
+
+    page = request.GET.get('page', 1)
+
+    try:
+        comments = paginator.page(page)
+        nbr_page =  comments.paginator.num_pages - 1
+    except PageNotAnInteger:
+        comments = paginator.page(page)
+    except EmptyPage:
+        comments = paginator.page(paginator.num_pages)
+ 
 
     path =  os.path.join(BASE_DIR, 'staticfiles/JsonFiles') 
 
@@ -200,7 +217,7 @@ def admin(request):
             pass
         else:
             dir_list_filters.append(e)
-    context = {"comments" : comments_list, "dir_list" : dir_list_filters, 'nbr_page' : nbr_page,
+    context = {"comments" : comments, "dir_list" : dir_list_filters, 'nbr_page' : nbr_page,
      "checked": len(request.user.checked.get_queryset())}
     return render(request, 'AppComments/admin.html', context)
 

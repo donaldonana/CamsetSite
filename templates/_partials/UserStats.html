@@ -3,7 +3,7 @@
 
  
 <div class="row d-flex align-items-center justify-content-center  " style="margin-bottom: 25px; margin-top: 10px;  ">
-    <div class="col-lg-6 col-sm-12 align-self-center forcanvas">
+    <!-- <div class="col-lg-6 col-sm-12 align-self-center forcanvas">
 
 
 
@@ -13,17 +13,18 @@
 
 
     </div>
-
+ -->
     <div class="col-lg-6 col-sm-12 align-self-center forcanvas" style=" height: 100%" >
 
-       <h5 class=" text-muted" style="font-size: 14px;">STATISTIQUES GLOBAL</h5>
 
-    <h4 class="font-italic"  > Total Commentaires : {{nbr_texte}} </h4>
-    <h4 class="font-italic"  > Nombre catégorie : {{nbr_cat}}  </h4>
+    <h5 class="font-italic"  > Total Commentaires : {{nbr_texte}} </h5>
+    <h5 class="font-italic"  > Voté Par vous : {{user_vote}}  </h5>
+
     {% if user.is_superuser %}
-    <h4 class="font-italic"  > Votés haineux : {{haineux__sum}} </h4>
-    <h4 class="font-italic"  > Votés offensif : {{offensif__sum}}  </h4>
-    <h4 class="font-italic"  > Votés normal : {{non_offensif__sum}}  </h4>
+    <h5 class="font-italic"  > Nombre catégorie : {{nbr_cat}}  </h5>
+    <h5 class="font-italic"  > Votés haineux : {{haineux__sum}} </h5>
+    <h5 class="font-italic"  > Votés offensif : {{offensif__sum}}  </h5>
+    <h5 class="font-italic"  > Votés normal : {{non_offensif__sum}}  </h5>
     {% endif %}
 
 
