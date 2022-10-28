@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import random
-
+from AppAuth.models import User
 from django.http import JsonResponse
 from AppAuth.models import comments
 from django.db.models import Sum, Count
@@ -105,9 +105,14 @@ def save(request):
         vote = MAX( comment.non_offensif, comment.offensif , comment.haineux )
         comment.vote_final = vote
 
+         
+
         comment.save()
         com_user = comments.objects.create(reponse=item["reponse"] , person = request.user, comment = comment)
         com_user.save()
+        request.user.vote = len(request.user.commentaires.get_queryset())
+        request.user.save()
+
 
  
 
@@ -119,8 +124,11 @@ def stats(request):
 
     # Comment.objects.values_list('haineux', flat=True)
 
-
+    request.user.vote = len(request.user.commentaires.get_queryset())
+    request.user.save()
     comments_list = Comment.objects.get_queryset().order_by('id')
+    users = User.objects.get_queryset().order_by('-vote')
+    # rang = [i , for i in range(1, len(user)+1)]
 
     paginator = Paginator(comments_list, 6)
 
@@ -138,7 +146,7 @@ def stats(request):
         comments = paginator.page(paginator.num_pages)
  
 
-    context = {'comments': comments, 'nbr_page' : nbr_page}
+    context = {'comments': comments, 'nbr_page' : nbr_page, 'users' : users, }
      
 
     var = Comment.objects.all().aggregate(Sum('haineux'))
