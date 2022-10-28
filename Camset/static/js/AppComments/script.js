@@ -79,6 +79,8 @@ function popupBox(){
 function GoTo(path){
   
   // alert($('#quantity').val());
+
+  idx = $('#quantity').val()
   
   var totalpage =  $('#pagination').data("page");
   const reg = new RegExp('^[0-9]+$');

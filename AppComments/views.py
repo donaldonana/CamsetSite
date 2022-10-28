@@ -41,14 +41,22 @@ def index(request):
 
     random.shuffle(comments_list)
 
-    n = len(comments_list)
+    paginator = Paginator(comments_list, 6)
 
-    nbr_page =  n // 6
-    if n% 6 != 0:
-        nbr_page = nbr_page + 1
+  
 
+    page = request.GET.get('page', 1)
+
+    try:
+        comments = paginator.page(page)
+        nbr_page =  comments.paginator.num_pages - 1
+    except PageNotAnInteger:
+        comments = paginator.page(page)
+    except EmptyPage:
+        comments = paginator.page(paginator.num_pages)
+ 
      
-    context = {'comments': comments_list, 'nbr_page' : nbr_page}
+    context = {'comments': comments, 'nbr_page' : nbr_page}
     context['user'] = request.user
     return render(request, 'AppComments/index.html', context)
 
