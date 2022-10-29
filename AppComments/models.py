@@ -26,8 +26,10 @@ class Comment(models.Model):
 	haineux = models.IntegerField(default = 0)
 	offensif = models.IntegerField(default = 0)
 	non_offensif = models.IntegerField(default = 0)
-	vote_final =  models.CharField(max_length=25, default="") 
+	vote_final =  models.CharField(max_length=25, default="")
 	file_name = models.CharField(max_length=25,  blank=True, null = True)
+	totaux_votes = models.IntegerField(default = 0)
+
 
 	 
 	publied_at = models.DateTimeField(default = timezone.now)

@@ -17,14 +17,14 @@
     <div class="col-lg-6 col-sm-12 align-self-center forcanvas" style=" height: 100%" >
 
 
-    <h5 class="font-italic"  > Total Commentaires : {{nbr_texte}} </h5>
-    <h5 class="font-italic"  > Voté Par vous : {{user_vote}}  </h5>
+    <h4 class="font-italic"  > Total Commentaires : {{nbr_texte}} </h4>
+    <h4 class="font-italic"  > Voté Par vous : {{user_vote}}  </h4>
 
     {% if user.is_superuser %}
-    <h5 class="font-italic"  > Nombre catégorie : {{nbr_cat}}  </h5>
-    <h5 class="font-italic"  > Votés haineux : {{haineux__sum}} </h5>
-    <h5 class="font-italic"  > Votés offensif : {{offensif__sum}}  </h5>
-    <h5 class="font-italic"  > Votés normal : {{non_offensif__sum}}  </h5>
+    <h4 class="font-italic"  > Nombre catégorie : {{nbr_cat}}  </h4>
+    <h4 class="font-italic"  > Votés haineux : {{haineux__sum}} </h4>
+    <h4 class="font-italic"  > Votés offensif : {{offensif__sum}}  </h4>
+    <h4 class="font-italic"  > Votés normal : {{non_offensif__sum}}  </h4>
     {% endif %}
 
 

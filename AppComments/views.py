@@ -32,12 +32,20 @@ def index(request):
 
     # comments_list = Comment.objects.get_queryset().exclude(id__in = comments_user ).order_by('id')
     comments = list(Comment.objects.get_queryset()  )
+    # print("begin")
+    # for comment in comments :
+    #     comment.totaux_votes = comment.offensif + comment.haineux + comment.non_offensif
+    #     comment.save()
+    # print("end")
+
     comments_list = []
+
 
 
     for el in comments:
         if el not in comments_user:
-            comments_list.append(el)
+            if el.totaux_votes < 7:
+                comments_list.append(el)
 
     random.shuffle(comments_list)
 
@@ -104,6 +112,7 @@ def save(request):
             comment.non_offensif = comment.non_offensif + 1 
         vote = MAX( comment.non_offensif, comment.offensif , comment.haineux )
         comment.vote_final = vote
+        comment.totaux_votes = comment.totaux_votes + 1
 
          
 
@@ -132,7 +141,17 @@ def stats(request):
     #     user.vote = len(user.commentaires.get_queryset())
     #     user.save()
 
-    users = User.objects.get_queryset().order_by('-vote')
+    Users = User.objects.get_queryset().order_by('-vote')
+
+
+    per_page = 5
+    # Paginator in a view function to paginate a queryset
+    # show 4 news per page
+    obj_paginator = Paginator(Users, per_page)
+    # list of objects on first page
+    users = obj_paginator.page(1).object_list
+    # range iterator of page numbers
+    page_range = obj_paginator.page_range
 
 
     paginator = Paginator(comments_list, 6)
@@ -151,7 +170,10 @@ def stats(request):
         comments = paginator.page(paginator.num_pages)
  
 
-    context = {'comments': comments, 'nbr_page' : nbr_page, 'users' : users, }
+    context = {'comments': comments, 
+    'nbr_page' : nbr_page, 
+    'users' : users, 
+    'page_range' : page_range}
      
 
     var = Comment.objects.all().aggregate(Sum('haineux'))
@@ -290,3 +312,49 @@ def filtering(request, id):
 def help(request):
  
     return render(request, 'AppComments/help.html') 
+
+
+@login_required
+def StatsPagination(request):
+
+    per_page = 5
+
+
+    page_no = int(request.GET.get('page_no'))  
+    current_page = int(request.GET.get('current_page'))  
+    numItems = int(request.GET.get('numItems')) 
+    lastNum =  int(request.GET.get('lastNum'))
+
+    ecart = abs(page_no - current_page) 
+
+    if numItems < per_page:
+        lastNum = lastNum + (per_page - numItems)
+
+    if page_no < current_page:
+        index = lastNum - ecart*per_page
+
+    if page_no > current_page:
+        index = lastNum + ecart*per_page
+
+    index = index - (per_page - 1)
+
+
+
+    Users = User.objects.get_queryset().order_by('-vote')
+    # Paginator in a view function to paginate a queryset
+    # show 4 news per page
+    obj_paginator = Paginator(Users, per_page)
+    # list of objects on first page
+    results = list(obj_paginator.page(page_no).object_list.values('email', 'username', 'vote'))
+
+    for el in results:
+        el["index"] = index
+        index = index + 1
+     
+ 
+    # print(numItems)
+    
+
+
+    return JsonResponse({"results":results , "status":"success"})
+

@@ -39,6 +39,82 @@
  
 {% if users %}
 
+
+
+
+ <div class="row d-flex align-items-center" style="margin-top: 35px; margin-bottom: 50px;">
+        <div class="col-lg-9 mx-auto align-self-center">
+            <!-- List group-->
+            <ul class="list-group shadow " id="StatsItem">
+                <!-- list group item-->
+                 {% for user in users %}
+
+                <li class="list-group-item StatsLi"  style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 1px; background-color: rgb(255, 254, 254); " >
+                    <!-- Custom content-->
+                    <div class="media align-items-lg-center flex-column flex-lg-row  ">
+                        <div class="media-body order-2 order-lg-1 text-center">
+
+                          <i class="fa fa-user fa-3x" aria-hidden="true"></i><br><br>
+
+                          <!-- <h3 class="mt-0  mb-3 " style="color: #E91E63;">{{comment.categorie}}</h3> -->
+
+                            
+                            <p class="font-italic mb-0 " style="font-size: 15px;  ">
+                             
+                                Utilisateur : <span class="font-weight-bold"> {{user.username}} </span>  
+
+                            </p><br>
+
+                            <p class="font-italic mb-0  " style="font-size: 15px;">
+                             
+                              Email : <span class="font-weight-bold">{{user.email}}</span> 
+
+
+                            </p><br>
+
+                            <p class="font-italic mb-0  " style="font-size: 15px;">
+                             
+                              Votes : <span class="font-weight-bold">{{user.vote}} votes  </span> 
+
+
+                            </p><br>
+
+                            <p class="font-italic mb-0 font-weight-bold" style="font-size: 16px;  ">
+                             
+                                Rang :  <span class="lasted">{{ forloop.counter }}  </span>
+
+
+                            </p><br>
+                             
+                             
+                        </div>
+                      </div> <!-- End -->
+                </li> <!-- End -->
+        {% endfor %}
+
+                <!-- list group item-->
+                 
+            </ul> <!-- End -->
+
+            <ul class="pagination" id="StatsPagination">
+
+              {% for i in page_range %}
+
+              <li class="page-item "><a class="page-link" href="{{i}}">{{ i }}</a></li>
+
+              {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+
+
+<!-- 
 <div style="margin-top: 65px; margin-bottom: 75px;">
 
 
@@ -94,7 +170,7 @@
 
 </div>
 
- 
+  -->
 {% endif %}
     
 
@@ -108,10 +184,15 @@
 
 
 
+<div class="modal"><!-- Place at bottom of page --></div>
 
+
+</div>    
 
  
 {% include '_partials/footer.html' %} 
+
+
 
 
 <script type="text/javascript">
@@ -122,16 +203,7 @@
         info: false,
     });
 
-    // $('table tr:eq(0)').prepend('<th style="text-align: center;"> Rang </th>');
-
-    // var id = 0;
-
-    // $('table tr:gt(0)').each(function() {
-    //   id++;
-    //   $(this).prepend('<td style="text-align: center;">' + id + '</td>');
-    // });
-
-
+ 
 });
 </script>
  

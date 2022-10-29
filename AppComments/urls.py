@@ -15,5 +15,7 @@ urlpatterns = [
     path('filtering', views.filtering, name='filtering'),
 
     path("stats", views.stats, name='stats'),
+    path("StatsPagination", views.StatsPagination, name='StatsPagination'),
+    
        
 ]
