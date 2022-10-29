@@ -51,8 +51,8 @@
 
                 <li class="list-group-item StatsLi"  style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 1px; background-color: rgb(255, 254, 254); " >
                     <!-- Custom content-->
-                    <div class="media align-items-lg-center flex-column flex-lg-row  ">
-                        <div class="media-body order-2 order-lg-1 text-center">
+                    <div class=" align-items-lg-center">
+                        <div class=" order-2 order-lg-1 text-center">
 
                           <i class="fa fa-user fa-3x" aria-hidden="true"></i><br><br>
 
@@ -96,7 +96,10 @@
                  
             </ul> <!-- End -->
 
-            <ul class="pagination" id="StatsPagination">
+            
+        </div>
+
+        <ul class="pagination" id="StatsPagination">
 
               {% for i in page_range %}
 
@@ -104,8 +107,7 @@
 
               {% endfor %}
 
-            </ul>
-        </div>
+        </ul>
     </div>
 
 
@@ -195,17 +197,7 @@
 
 
 
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('#example').DataTable({
-        pagingType: 'simple_numbers',
-        ordering: false,
-        info: false,
-    });
-
  
-});
-</script>
  
     
 {% endblock content %}

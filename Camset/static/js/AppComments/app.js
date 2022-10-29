@@ -42,8 +42,8 @@ $(document).ready(function () {
           $.each(response.results, function(i, val) {
 
              const html = '<li class="list-group-item StatsLi"  style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 1px; background-color: rgb(255, 254, 254); " >'
-                  + '<div class="media align-items-lg-center flex-column flex-lg-row  ">'
-                        +'<div class="media-body order-2 order-lg-1 text-center">'
+                  + '<div class=" align-items-lg-center">'
+                        +'<div class=" order-2 order-lg-1 text-center">'
 
                              +'<i class="fa fa-user fa-3x" aria-hidden="true"></i><br><br>'   
 
