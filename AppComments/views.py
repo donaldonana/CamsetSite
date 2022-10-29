@@ -41,7 +41,7 @@ def index(request):
 
     random.shuffle(comments_list)
 
-    paginator = Paginator(comments_list, 6)
+    paginator = Paginator(comments_list, 9)
 
   
 
@@ -190,7 +190,6 @@ def admin(request):
     comments = list(Comment.objects.get_queryset().order_by('id'))
 
 
-    random.shuffle(comments)
 
     paginator = Paginator(comments, 15)
 

@@ -76,8 +76,8 @@
                             <h3 class="mt-0  mb-3 " style="color: #E91E63;">{{comment.categorie}}</h3>
                             <p class="font-italic mb-0 font-weight-bold" style="font-size: 15px;">
                              
-                              {% if comment.texte|length|get_digit:"-1" > 110 %}
-                                {{comment.texte|truncatechars:60}}
+                              {% if comment.texte|length|get_digit:"-1" > 120 %}
+                                {{comment.texte|truncatechars:100}}
                                 <button type="button" class="btn btn-link btrm " style="color: blue;"
                                 onclick='LirePlus( "{{comment.texte}}" , "{{comment.categorie}}",  );'>
                                   lire plus
