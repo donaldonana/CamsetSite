@@ -24,7 +24,7 @@
 {% include '_partials/header.html' %} 
 
 
-<div class="container" style=" width: 75%;">
+<div class="container" style="">
 
  <div class="row d-flex align-items-center justify-content-center  "  style="margin-top: ;">
     <div class="col-lg-12  align-self-center">
@@ -39,11 +39,20 @@
  
 {% if users %}
 
+  <!-- <div class="row d-flex align-items-center justify-content-center " style="margin-bottom: 12px; margin-top: 20px;">
+    <div class="col-12 align-self-center ">
+    <span class="font-italic "> Rechercher Par Nom d'utilisateur :  </span>  
+    </div>
+    <div class="col-12 align-self-center" style="margin-top: 6px;">
+    <input type="text" class="username" id="filter" name="" placeholder="User Name..." style=" border-radius: 5px; height: 30px;"> 
+    <i class="fa fa-search fa-lg" aria-hidden="true" style="margin-left: 10px;cursor: pointer;"  ></i>
+    </div>
+    
+  </div> -->
 
 
-
- <div class="row" style="margin-top: 35px; margin-bottom: 50px;">
-        <div class="col-lg-9 mx-auto">
+ <div class="row" style="margin-top: 35px; margin-bottom: 20px;">
+        <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
             <!-- List group-->
             <ul class="list-group shadow " id="StatsItem">
                 <!-- list group item-->
@@ -96,10 +105,8 @@
                  
             </ul> <!-- End -->
 
-            
-        </div>
 
-        <ul class="pagination" id="StatsPagination">
+        <!-- <ul class="pagination" id="StatsPagination">
 
               {% for i in page_range %}
 
@@ -107,8 +114,47 @@
 
               {% endfor %}
 
-        </ul>
+        </ul> -->
+
+
+
+            
+        </div>
+
+        
     </div>
+
+    <div class="row d-flex align-items-center justify-content-center " style="margin-bottom: 18px;  ">
+
+      <div class="col-lg-8 col-md-10 col-sm-12 mx-auto  align-self-center">
+
+        <p class="  font-weight-bold" >pages <span id="CurrentPage">1</span>/{{nbr_page_user}}   </p>
+        
+      </div>
+       
+    </div>
+
+    <div class="row d-flex align-items-center justify-content-center " style="margin-bottom: 50px;  ">
+
+      <div class="col-lg-8 col-md-10 col-sm-12 mx-auto  align-self-center">
+
+        <label for="cars" style="font-size: 12px">Changer de Page :</label>
+        <select id="cars" class="quantity" name="carlist" form="carform" style=" text-align: center; height: 25px;"
+        id="StatsPagination">
+
+          {% for i in page_range %}
+
+              <option value="{{i}}" style="text-align: center;"><a class="page-link" href="#">{{ i }}</a></option>
+
+          {% endfor %}
+          
+        </select>
+        
+      </div>
+       
+    </div>
+    
+  </div>
 
 
 

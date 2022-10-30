@@ -9,10 +9,10 @@ $(document).ready(function () {
 
 
 
-  $('#StatsPagination a').click(function(event){
+  $('select').on('change', function() {
     // preventing default actions
-    event.preventDefault();
-    var page_no = $(this).attr('href');
+    // alert(this.value);
+    var page_no = this.value;
     numItems = $(".StatsLi").length;
     lastNum = $('.lasted:last').text() ;
 
@@ -98,7 +98,9 @@ $(document).ready(function () {
         });
 
           $.mynamespace.page = page_no;
-          $(window).scrollTop(0);
+          $('#CurrentPage').text(page_no);
+
+          $(window).scrollTop(100);
       },
         error: function () {
 

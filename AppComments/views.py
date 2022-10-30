@@ -153,6 +153,8 @@ def stats(request):
     # range iterator of page numbers
     page_range = obj_paginator.page_range
 
+    nbr_page_user = obj_paginator.page(1).paginator.num_pages
+
 
     paginator = Paginator(comments_list, 6)
 
@@ -173,7 +175,8 @@ def stats(request):
     context = {'comments': comments, 
     'nbr_page' : nbr_page, 
     'users' : users, 
-    'page_range' : page_range}
+    'page_range' : page_range,
+    'nbr_page_user' : nbr_page_user}
      
 
     var = Comment.objects.all().aggregate(Sum('haineux'))

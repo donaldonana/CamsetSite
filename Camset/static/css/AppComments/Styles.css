@@ -156,6 +156,11 @@ a {
 
 @media only screen and (min-width: 600px) {
   /* For tablets: */
+
+  .username {
+    width: 33%;
+  }
+
 .forcanvas {
     width: 50%;
   }
@@ -170,6 +175,10 @@ a {
 
 @media only screen and (max-width: 768px) {
   /* For phone: */
+
+  .username {
+    width: 38%;
+  }
  .forcanvas {
     width: 70%;
   }
@@ -183,6 +192,11 @@ a {
 
 @media only screen and (min-width: 768px) {
   /* For desktop: */
+
+  .username {
+    width: 28%;
+  }
+
  .forcanvas {
     width: 25%;
   }
