@@ -154,11 +154,29 @@ a {
 
  
 
+
+@media only screen and (max-width: 768px) {
+  /* For phone: */
+
+  .username {
+    width: 68%;
+  }
+ .forcanvas {
+    width: 70%;
+  }
+
+  .quantity{
+
+   width: 22%;
+  }
+ 
+}
+
 @media only screen and (min-width: 600px) {
   /* For tablets: */
 
   .username {
-    width: 33%;
+    width: 53%;
   }
 
 .forcanvas {
@@ -167,34 +185,19 @@ a {
 
 .quantity{
 
-  width: 10%;
+  width: 18%;
 }
 
    
 }
 
-@media only screen and (max-width: 768px) {
-  /* For phone: */
 
-  .username {
-    width: 38%;
-  }
- .forcanvas {
-    width: 70%;
-  }
-
-  .quantity{
-
-   width: 18%;
-  }
- 
-}
 
 @media only screen and (min-width: 768px) {
   /* For desktop: */
 
   .username {
-    width: 28%;
+    width: 38%;
   }
 
  .forcanvas {
@@ -203,6 +206,6 @@ a {
 
   .quantity{
 
-   width: 6%
+   width: 12%
   }
 }

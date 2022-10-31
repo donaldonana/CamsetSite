@@ -13,6 +13,8 @@ urlpatterns = [
     path('admin', views.admin, name='admin'),
     path('help', views.help, name='help'),
     path('filtering', views.filtering, name='filtering'),
+    # path('finduser', views.finduser, name='finduser'),
+    
 
     path("stats", views.stats, name='stats'),
     path("StatsPagination", views.StatsPagination, name='StatsPagination'),

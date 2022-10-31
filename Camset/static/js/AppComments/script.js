@@ -111,8 +111,50 @@ function GoTo(path){
 
 
 
-//  Developed By Yasser Mas
-// yasser.mas2@gmail.com
+function searchuser(){
+
+
+
+    var texte = $('#UserName').val()
+
+    if (texte != "") {
+
+      $.ajax({
+
+                    data : {"filter" : texte },
+                    url: 'finduser',
+                    // on success
+                    success: function(response) { 
+                        // alert("succes");  
+                        //  window.setTimeout(function () {
+                        //     window.location.href = '';
+                        // }, 0);
+
+                    },
+                    // on error
+                    error: function(response) {
+                        // alert the error if any error occured
+                        console.log(response.responseJSON.errors)
+                    }
+                });
+
+      alert(texte);
+
+
+    }
+
+    else {
+
+      $('#UserName').css({
+                             
+          'border-color': 'red',
+        });
+    }
+    
+ 
+
+}
+
 
 
 

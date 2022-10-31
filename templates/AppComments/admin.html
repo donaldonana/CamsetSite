@@ -57,22 +57,24 @@
       </div>
 
 
+          
+
 
  
 
 </div>
 
  <div class="row">
-        <div class="col-lg-8 mx-auto">
+        <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
             <!-- List group-->
-            <ul class="list-group shadow" id="AdminItem">
+            <ul class="list-group shadow" id="AdminCommentItem">
                 <!-- list group item-->
                  {% for comment in comments %}
 
                 <li class="list-group-item"  id="{{comment.id}}" style=" border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 1px; background-color: rgb(255, 254, 254); " >
                     <!-- Custom content-->
-                    <div class="media align-items-lg-center flex-column flex-lg-row p-4">
-                        <div class="media-body order-2 order-lg-1 text-center">
+                    <div class=" align-items-lg-center ">
+                        <div class="order-2 order-lg-1 text-center">
                             <h3 class="mt-0  mb-3 " style="color: #E91E63;">{{comment.categorie}}</h3>
                             <p class="font-italic mb-0 font-weight-bold" style="font-size: 15px;">
                              
@@ -158,9 +160,8 @@
 
 
         <div class="col-12 mx-auto" style="margin-top: 25px;">
-            <button type="button" class="btn btn-sm btn-outline-danger  " onclick='deleteSelectItem();'>
-                Supprimer les commentaires Selectionnées
-            </button>
+                <img src= {% static 'img/crash.png' %}  style="width: 3% ; cursor: pointer;" onclick='deleteSelectItem();'/>   <figcaption style="font-size: 11px" class="font-italic">supprimer
+                </figcaption>
         </div>
         
       </div>

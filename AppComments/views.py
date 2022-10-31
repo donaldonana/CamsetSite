@@ -44,8 +44,8 @@ def index(request):
 
     for el in comments:
         if el not in comments_user:
-            # if el.totaux_votes < 7:
-            comments_list.append(el)
+            if el.totaux_votes < 7:
+                comments_list.append(el)
 
     random.shuffle(comments_list)
 
@@ -201,22 +201,13 @@ def is_ajax(request):
 @login_required
 def admin(request):
 
-    # if is_ajax(request=request):
-
-        # filters = request.GET.get('filter')  
-        # print(filters)
-
-
-        # comments_list = Comment.objects.filter(texte__contains=filters).order_by('id')
-
-    # else : 
-    #     print("hellooooo world 2333333.")
-
+     
     comments = list(Comment.objects.get_queryset().order_by('id'))
 
 
 
     paginator = Paginator(comments, 15)
+    page_range = paginator.page_range
 
   
 
@@ -241,7 +232,10 @@ def admin(request):
             pass
         else:
             dir_list_filters.append(e)
-    context = {"comments" : comments, "dir_list" : dir_list_filters, 'nbr_page' : nbr_page,
+    context = {"comments" : comments, 
+    "dir_list" : dir_list_filters, 
+    'nbr_page' : nbr_page,
+    'page_range' : page_range,
      "checked": len(request.user.checked.get_queryset())}
     return render(request, 'AppComments/admin.html', context)
 
@@ -361,3 +355,32 @@ def StatsPagination(request):
 
     return JsonResponse({"results":results , "status":"success"})
 
+
+
+ 
+# @login_required
+# def finduser(request):
+
+     
+#     Users = User.objects.get_queryset().order_by('-vote')
+#     # Paginator in a view function to paginate a queryset
+#     # show 4 news per page
+#     obj_paginator = Paginator(Users, per_page)
+#     # list of objects on first page
+#     user_list = list(obj_paginator.page(page_no).object_list.values('email', 'username', 'vote'))
+
+#     for user in user_list:
+#         el["index"] = index
+#         index = index + 1
+     
+ 
+#     # print(numItems)
+    
+
+
+#     return JsonResponse({"results":results , "status":"success"})
+
+
+
+ 
+#   

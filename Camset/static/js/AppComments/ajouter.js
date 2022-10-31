@@ -3,10 +3,10 @@
 
     $body = $("body");
 
-     $.mynamespace = {};
-     $.mynamespace.myVar = [];
-     $.mynamespace.len = 0 ;
-     $.mynamespace.myVar2 = "somethingElse";
+     $.space = {};
+     $.space.comments = [];
+     $.space.nombre = 0 ;
+     $.space.myVar2 = "somethingElse";
 
     $(document).on({
          ajaxStart: function() { $body.addClass("loading");    },
@@ -19,6 +19,9 @@
          //  }, 4000);
        }    
     });
+
+
+
 
 
 
@@ -86,13 +89,13 @@
             id = $(this).data("id");
             var item = { "id" : id};
             if ( $(this).is(':checked') ) {
-              $.mynamespace.myVar.push(item);
-              $.mynamespace.len = $.mynamespace.len + 1;
+              $.space.comments.push(item);
+              $.space.nombre = $.space.nombre + 1;
             } 
             else { 
 
-              $.mynamespace.myVar = $.mynamespace.myVar.filter( obj => obj.id !== id);
-              $.mynamespace.len = $.mynamespace.len - 1;
+              $.space.comments = $.space.comments.filter( obj => obj.id !== id);
+              $.space.nombre = $.space.nombre - 1;
 
 
             }
@@ -131,17 +134,24 @@
 
 function deleteSelectItem( ) {
 
-  if (confirm(`Etes vous sure de vouloir supprimer  ${$.mynamespace.len} commentaire(s) ? `)) {
+  if (confirm(`Etes vous sure de vouloir supprimer  ${$.space.nombre} commentaire(s) ? `)) {
 
 
    $.ajax({
 
-            data : {"items" : $.mynamespace.myVar },
+            data : {"items" : $.space.comments },
             url: 'auth/DeleteChecked',
                     // on success
              success: function(response) { 
-                 // alert("succes");  
-              window.setTimeout(function () {window.location.href = '/admin' }, 0);
+
+                 for (var i = 0; i < $.space.comments.length; i++) {
+                    var id = $.space.comments[i].id;
+                    $('li#'+id+'').css('background-color' , '#ccc');
+                    $('li#'+id+'').fadeOut('slow');
+                  }
+
+                  $.space.comments = [];
+                  $.space.nombre = 0;
 
                },
          // on error
