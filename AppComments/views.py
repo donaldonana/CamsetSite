@@ -44,7 +44,7 @@ def index(request):
 
     for el in comments:
         if el not in comments_user:
-            if el.totaux_votes < 7:
+            if el.totaux_votes < 11:
                 comments_list.append(el)
 
     random.shuffle(comments_list)
@@ -263,6 +263,7 @@ def upload(request):
  
 
     print("-----------begin-----")
+    i = 0
     for texte in parsed["commentaires"]:
         try:
             c = Comment(categorie=parsed["categorie"] , post_titre = parsed["post_titre"], post_img = parsed["post_img"] , post_url = parsed["post_url"], texte = texte , file_name = file_name )
@@ -270,6 +271,8 @@ def upload(request):
             c.save()
         except Exception as e:
             print("Maybe The Comment Alredy Exist")
+        print(i)
+        i = i + 1
     print("-----------successfuly end----------")
     status = True
     message = "successfuly add the file"
