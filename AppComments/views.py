@@ -44,7 +44,7 @@ def index(request):
 
     for el in comments:
         if el not in comments_user:
-            if el.totaux_votes < 11:
+            if el.totaux_votes <= 5:
                 comments_list.append(el)
 
     random.shuffle(comments_list)
