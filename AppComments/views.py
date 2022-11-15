@@ -37,6 +37,7 @@ def index(request):
     #     comment.totaux_votes = comment.offensif + comment.haineux + comment.non_offensif
     #     comment.save()
     # print("end")
+    
 
     comments_list = []
 
