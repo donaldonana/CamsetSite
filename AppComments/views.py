@@ -16,6 +16,7 @@ import itertools
 import re
 from pathlib import Path
 import os
+from django.db.models import Q
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,11 +28,31 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 @login_required
 def index(request):
 
-    comments_user = list(request.user.commentaires.get_queryset() )
-    # comments_user = request.user.commentaires.all().values_list('id', flat=True)
+    # comments_user = list(request.user.commentaires.get_queryset() )
 
-    # comments_list = Comment.objects.get_queryset().exclude(id__in = comments_user ).order_by('id')
-    comments = list(Comment.objects.get_queryset()  )
+
+    comments_user = request.user.commentaires.all()
+    print("Bonjour donald 0")
+    comments_list = Comment.objects.filter(totaux_votes__lt=7)
+    print("Bonjour donald 32")
+    comments_list = list(set(comments_list).difference( set(comments_user)))
+
+
+    # for el in comments_list:
+    #     print(el)
+
+
+
+     
+    # comments_list = Comment.objects.filter(~Q( id__in = comments_user ) ) 
+    # comments_list = list(Comment.objects.exclude(id__in = comments_user))
+
+     
+     
+    # comments = list(Comment.objects.get_queryset()  )
+    print("Bonjour donald 2")
+    print(comments_list)
+
     # print("begin")
     # for comment in comments :
     #     comment.totaux_votes = comment.offensif + comment.haineux + comment.non_offensif
@@ -39,16 +60,18 @@ def index(request):
     # print("end")
     
 
-    comments_list = []
+    # comments_list = []
 
 
 
-    for el in comments:
-        if el not in comments_user:
-            if el.totaux_votes <= 5:
-                comments_list.append(el)
+    print("Bonjour donald 1 ")
+    # for el in comments_list:
+    #         if el.totaux_votes < 7:
+    #             comments_list.append(el)
+    print("Bonjour donald")
 
-    random.shuffle(comments_list)
+
+    # random.shuffle(comments_list)
 
     paginator = Paginator(comments_list, 9)
 

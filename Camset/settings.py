@@ -91,15 +91,19 @@ DATABASES = {
 
     'default': {
            'ENGINE': os.environ.get("NOSQL_ENGINE", "djongo"),
+
+           # 'NAME': 'Camset',
            
            'CLIENT': {
-                'host': 'mongodb+srv://donaldonana:nanojunior92@cluster0.clm4i.mongodb.net/Camset?retryWrites=true&w=majority',
+                'host': 'mongodb+srv://donaldonana:nanojunior92@cluster0.clm4i.mongodb.net/?retryWrites=true&w=majority',
                 'name' : 'Camset',
                 'username': 'donaldonana',
                 'password': 'nanojunior92',
                 'uuidRepresentation': 'standard',
+                'authSource': 'Camset',
                 'authMechanism': 'SCRAM-SHA-1'
             },
+
             'ENFORCE_SCHEMA': False
        } 
 
