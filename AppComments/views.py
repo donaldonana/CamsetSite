@@ -34,9 +34,9 @@ def index(request):
 
     comments_user = request.user.commentaires.all()
     print("Bonjour donald 0")
-    comments_list = Comment.objects.filter(totaux_votes__lt=7)
+    comments_list = Comment.objects.filter(totaux_votes__lt=8)
     print("Bonjour donald 32")
-    comments_list = set(comments_list).difference( set(comments_user))
+    # comments_list = set(comments_list).difference( set(comments_user))
 
 
     # for el in comments_list:
@@ -219,7 +219,7 @@ def stats(request):
 
     # context['user_vote'] = len(request.user.commentaires.all())
     print("tttt")
-    
+
 
 
     
