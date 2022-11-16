@@ -16,6 +16,7 @@ import itertools
 import re
 from pathlib import Path
 import os
+from deepdiff import DeepDiff
 from django.db.models import Q
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,9 +35,9 @@ def index(request):
 
     comments_user = request.user.commentaires.all()
     print("Bonjour donald 0")
-    comments_list = Comment.objects.filter(totaux_votes__lt=8)
+    comments_list = Comment.objects.filter(totaux_votes__lt=40).order_by('-id')[:1000]
     print("Bonjour donald 32")
-    # comments_list = set(comments_list).difference( set(comments_user))
+    comments = [x for x in comments_list if x not in comments_user]
 
 
     # for el in comments_list:
@@ -50,31 +51,24 @@ def index(request):
 
      
      
-    # comments = list(Comment.objects.get_queryset()  )
-    print("Bonjour donald 2")
-    print(comments_list)
+    # comments_list = list(comments_list)
 
-    # print("begin")
-    # for comment in comments :
-    #     comment.totaux_votes = comment.offensif + comment.haineux + comment.non_offensif
-    #     comment.save()
-    # print("end")
+     
     
 
     # comments_list = []
 
 
 
-    print("Bonjour donald 1 ")
-    # for el in comments_list:
-    #         if el.totaux_votes < 7:
-    #             comments_list.append(el)
-    print("Bonjour donald")
+   
 
 
     # random.shuffle(comments_list)
-
-    paginator = Paginator(comments_list, 9)
+    try:
+        paginator = Paginator(comments, 9)    
+    except Exception as e:
+        pass
+     
 
   
 
@@ -89,7 +83,7 @@ def index(request):
         comments = paginator.page(paginator.num_pages)
  
      
-    context = {'comments': comments, 'nbr_page' : nbr_page}
+    context = {'comments': comments, 'nbr_page' : nbr_page , 'comments_user' : comments_user}
     context['user'] = request.user
     return render(request, 'AppComments/index.html', context)
 
@@ -138,13 +132,14 @@ def save(request):
         vote = MAX( comment.non_offensif, comment.offensif , comment.haineux )
         comment.vote_final = vote
         comment.totaux_votes = comment.totaux_votes + 1
+        request.user.vote = request.user.vote + 1
 
          
 
         comment.save()
         com_user = comments.objects.create(reponse=item["reponse"] , person = request.user, comment = comment)
         com_user.save()
-        request.user.vote = len(request.user.commentaires.get_queryset())
+           
         request.user.save()
 
 
