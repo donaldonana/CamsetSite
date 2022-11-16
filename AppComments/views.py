@@ -16,7 +16,6 @@ import itertools
 import re
 from pathlib import Path
 import os
-from deepdiff import DeepDiff
 from django.db.models import Q
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,7 +34,7 @@ def index(request):
 
     comments_user = request.user.commentaires.all()
     print("Bonjour donald 0")
-    comments_list = Comment.objects.filter(totaux_votes__lt=40).order_by('-id')[:1000]
+    comments_list = Comment.objects.filter(totaux_votes__lt=40).order_by('-id')[:1800]
     print("Bonjour donald 32")
     comments = [x for x in comments_list if x not in comments_user]
 
