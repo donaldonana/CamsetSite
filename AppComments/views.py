@@ -34,7 +34,7 @@ def index(request):
 
     comments_user = request.user.commentaires.all()
     print("Bonjour donald 0")
-    comments_list = Comment.objects.filter(totaux_votes__lt=40).order_by('-id')[:1800]
+    comments_list = Comment.objects.filter(totaux_votes__lt=40).order_by('-id')[:100]
     print("Bonjour donald 32")
     comments = [x for x in comments_list if x not in comments_user]
 
@@ -62,7 +62,7 @@ def index(request):
    
 
 
-    # random.shuffle(comments_list)
+    random.shuffle(comments)
     try:
         paginator = Paginator(comments, 9)    
     except Exception as e:
