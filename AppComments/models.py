@@ -39,4 +39,23 @@ class Comment(models.Model):
 	def __str__(self):
 		return str(self.texte)
 
- 
+
+
+class CommentStats(models.Model):
+	"""docstring for CommentStats"""
+
+	def save(self, *args, **kwargs):
+		if not self.pk and CommentStats.objects.exists():
+		# if you'll not check for self.pk 
+		# then error will also raised in update of exists model
+			raise ValidationError('There is can be only one JuicerBaseSettings instance')
+		return super(CommentStats, self).save(*args, **kwargs)
+
+	nbr_comment = models.IntegerField(default = 4)
+
+	nbr_categorie = models.IntegerField(default = 7221)
+
+	def __str__(self):
+		return str(self.texte)
+	
+		

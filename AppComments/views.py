@@ -30,12 +30,13 @@ def index(request):
 
     # comments_user = list(request.user.commentaires.get_queryset() )
 
+    # comments_user = request.user.commentaires.all().values_list('id', flat=True)
 
     comments_user = request.user.commentaires.all()
     print("Bonjour donald 0")
     comments_list = Comment.objects.filter(totaux_votes__lt=7)
     print("Bonjour donald 32")
-    comments_list = list(set(comments_list).difference( set(comments_user)))
+    comments_list = set(comments_list).difference( set(comments_user))
 
 
     # for el in comments_list:
@@ -157,15 +158,17 @@ def stats(request):
 
     # Comment.objects.values_list('haineux', flat=True)
 
-    request.user.save()
-    comments_list = Comment.objects.get_queryset().order_by('id')
+    comments_list = Comment.objects.all().order_by('id')
+    print("rrrrr")
     # users = list(User.objects.get_queryset().order_by('-vote'))
 
     # for user in users :
     #     user.vote = len(user.commentaires.get_queryset())
     #     user.save()
 
-    Users = User.objects.get_queryset().order_by('-vote')
+    Users = User.objects.all().order_by('-vote')
+    print("vvvvv")
+
 
 
     per_page = 5
@@ -195,8 +198,9 @@ def stats(request):
     except EmptyPage:
         comments = paginator.page(paginator.num_pages)
  
+    print("bbbb")
 
-    context = {'comments': comments, 
+    context = {'comments': comments_list, 
     'nbr_page' : nbr_page, 
     'users' : users, 
     'page_range' : page_range,
@@ -210,9 +214,14 @@ def stats(request):
     var = Comment.objects.all().aggregate(Sum('non_offensif'))
     context['non_offensif__sum'] = var['non_offensif__sum']
     nbr_cat = Comment.objects.values('categorie').annotate(Count('categorie'))
-    context['nbr_cat'] = len(nbr_cat)
-    context['nbr_texte'] = len(comments_list)
-    context['user_vote'] = len(request.user.commentaires.get_queryset())
+    # context['nbr_cat'] = len(nbr_cat)
+    # context['nbr_texte'] = Comment.objects.all().aggregate(Sum('offensif'))
+
+    # context['user_vote'] = len(request.user.commentaires.all())
+    print("tttt")
+    
+
+
     
 
 
