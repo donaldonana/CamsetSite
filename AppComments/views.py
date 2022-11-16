@@ -34,7 +34,7 @@ def index(request):
 
     comments_user = request.user.commentaires.all()
     print("Bonjour donald 0")
-    comments_list = Comment.objects.filter(totaux_votes__lt=40).order_by('-id')[:100]
+    comments_list = Comment.objects.filter(totaux_votes__lt=40).order_by('-id')[:400]
     print("Bonjour donald 32")
     comments = [x for x in comments_list if x not in comments_user]
 
@@ -229,7 +229,8 @@ def is_ajax(request):
 def admin(request):
 
      
-    comments = list(Comment.objects.get_queryset().order_by('id'))
+    comments = list(Comment.objects.filter(totaux_votes__lt=40).order_by('-id')[:100])
+
 
 
 
@@ -262,8 +263,7 @@ def admin(request):
     context = {"comments" : comments, 
     "dir_list" : dir_list_filters, 
     'nbr_page' : nbr_page,
-    'page_range' : page_range,
-     "checked": len(request.user.checked.get_queryset())}
+    'page_range' : page_range}
     return render(request, 'AppComments/admin.html', context)
 
 @login_required
