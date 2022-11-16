@@ -17,76 +17,40 @@ import re
 from pathlib import Path
 import os
 from django.db.models import Q
+from django.db.models import BigAutoField
+import pymongo
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Create your views here.
-
-
+# 3.12.3
+def getdb():
+    url = "mongodb+srv://donaldonana:nanojunior92@cluster0.clm4i.mongodb.net/?retryWrites=true&w=majority"
+    client = pymongo.MongoClient(url)
+    db = client.Camset
+    return db
 
 @login_required
 def index(request):
 
     # comments_user = list(request.user.commentaires.get_queryset() )
 
-    # comments_user = request.user.commentaires.all().values_list('id', flat=True)
-
-    comments_user = request.user.commentaires.all()
-    print("Bonjour donald 0")
-    comments_list = Comment.objects.filter(totaux_votes__lt=40).order_by('-id')[:400]
-    print("Bonjour donald 32")
-    comments = [x for x in comments_list if x not in comments_user]
+    db = getdb()
+    comment_user = [id for id in db.AppAuth_comments.find({"person_id" : request.user.id}).distinct('comment_id')]
 
 
-    # for el in comments_list:
-    #     print(el)
-
-
-
-     
-    # comments_list = Comment.objects.filter(~Q( id__in = comments_user ) ) 
-    # comments_list = list(Comment.objects.exclude(id__in = comments_user))
-
-     
-     
-    # comments_list = list(comments_list)
-
-     
     
+    comments_list = db.AppComments_comment.aggregate(
+   [ {"$match": {"id" : { '$nin':comment_user } , "totaux_votes": { '$lt': 11 } }} , { '$sample': { 'size': 9 } } 
+   ])
 
-    # comments_list = []
-
-
-
-   
-
-
-    random.shuffle(comments)
-    try:
-        paginator = Paginator(comments, 9)    
-    except Exception as e:
-        pass
-     
-
-  
-
-    page = request.GET.get('page', 1)
-
-    try:
-        comments = paginator.page(page)
-        nbr_page =  comments.paginator.num_pages - 1
-    except PageNotAnInteger:
-        comments = paginator.page(page)
-    except EmptyPage:
-        comments = paginator.page(paginator.num_pages)
- 
-     
-    context = {'comments': comments, 'nbr_page' : nbr_page , 'comments_user' : comments_user}
+    context = {'comments': comments_list }
     context['user'] = request.user
     return render(request, 'AppComments/index.html', context)
 
  
+
 
 def format(a):
     # url = re.sub('\.com$', '', url)

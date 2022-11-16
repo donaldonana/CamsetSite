@@ -25,3 +25,5 @@ class comments(models.Model):
 	reponse = models.CharField(max_length = 25, blank=True, null = True)
 
 
+# comment_user = [id for id in db.AppAuth_comments.find({"person_id" : 1}).distinct('id')]
+# db.AppComments_comment.find({"id" : { '$nin':comment_user }})

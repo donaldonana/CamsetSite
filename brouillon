@@ -28,3 +28,81 @@
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+
+
+
+
+  # comments_user = request.user.commentaires.all().values_list('id', flat=True)
+    # comments_id = request.user.commentaires.all().values_list('id', flat=True)
+
+
+    # comments_user = request.user.commentaires.all()
+
+
+
+
+        # comment = []
+# .find({"id" : { '$nin':comment_user }})
+
+    # for i in range(9):
+
+    #     record = comments_list.next()
+
+    #     if record:
+
+    #         comment.append(record)
+
+
+
+    # for i in range(9):
+
+ 
+    # comments = [x for x in comments_list if x not in comments_user]
+
+
+    # for el in comments_list:
+    #     print(el)
+
+
+
+     
+    # comments_list = Comment.objects.filter(~Q( id__in = comments_user ) ) 
+    # comments_list = list(Comment.objects.exclude(id__in = comments_user))
+
+     
+     
+    # comments_list = list(comments_list)
+
+     
+    
+
+    # comments_list = []
+
+
+
+   
+
+
+    # random.shuffle(comments_list)
+    # try:
+    #     paginator = Paginator(comments_list, 9)    
+    # except Exception as e:
+    #     pass
+     
+
+  
+
+    # page = request.GET.get('page', 1)
+
+    # try:
+    #     comments = paginator.page(page)
+    #     nbr_page =  comments.paginator.num_pages - 1
+    # except PageNotAnInteger:
+    #     comments = paginator.page(page)
+    # except EmptyPage:
+    #     comments = paginator.page(paginator.num_pages)
+ 
+     
+
+    # comments_list = Comment.objects.filter(totaux_votes__lt=40) 
+     
