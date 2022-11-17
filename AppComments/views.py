@@ -42,7 +42,7 @@ def index(request):
 
     
     comments_list = db.AppComments_comment.aggregate(
-   [ {"$match": {"id" : { '$nin':comment_user } , "totaux_votes": { '$lt': 11 } }} , { '$sample': { 'size': 9 } } 
+   [ {"$match": {"id" : { '$nin':comment_user } , "totaux_votes": { '$lt': 15 } }} , { '$sample': { 'size': 9 } } 
    ])
 
     context = {'comments': comments_list }
@@ -62,9 +62,9 @@ def format(a):
 def MAX(non_offensif, offensif, haineux):
     if non_offensif > offensif and non_offensif > haineux:
         return "normal"
-    elif offensif > non_offensif and offensif > haineux :
+    elif offensif >= non_offensif and offensif > haineux :
         return "offensif"
-    elif haineux > non_offensif and haineux > offensif:
+    elif haineux >= non_offensif and haineux >= offensif:
         return "haineux"
     else:
         return ""
@@ -114,19 +114,12 @@ def save(request):
 @login_required
 def stats(request):
 
-    # Comment.objects.values_list('haineux', flat=True)
+    db = getdb()
+
 
     comments_list = Comment.objects.all().order_by('id')
-    print("rrrrr")
-    # users = list(User.objects.get_queryset().order_by('-vote'))
-
-    # for user in users :
-    #     user.vote = len(user.commentaires.get_queryset())
-    #     user.save()
-
+     
     Users = User.objects.all().order_by('-vote')
-    print("vvvvv")
-
 
 
     per_page = 5
@@ -156,7 +149,6 @@ def stats(request):
     except EmptyPage:
         comments = paginator.page(paginator.num_pages)
  
-    print("bbbb")
 
     context = {'comments': comments_list, 
     'nbr_page' : nbr_page, 
@@ -165,17 +157,12 @@ def stats(request):
     'nbr_page_user' : nbr_page_user}
      
 
-    var = Comment.objects.all().aggregate(Sum('haineux'))
-    context['haineux__sum'] = var['haineux__sum']
-    var = Comment.objects.all().aggregate(Sum('offensif'))
-    context['offensif__sum'] = var['offensif__sum']
-    var = Comment.objects.all().aggregate(Sum('non_offensif'))
-    context['non_offensif__sum'] = var['non_offensif__sum']
-    nbr_cat = Comment.objects.values('categorie').annotate(Count('categorie'))
-    # context['nbr_cat'] = len(nbr_cat)
-    # context['nbr_texte'] = Comment.objects.all().aggregate(Sum('offensif'))
+    context['haineux__sum'] = db.AppComments_comment.count_documents({"vote_final" : "haineux"})
+    context['offensif__sum'] = db.AppComments_comment.count_documents({"vote_final" : "offensif"})
+    context['non_offensif__sum'] = db.AppComments_comment.count_documents({"vote_final" : "normal"})
+    context['nbr_cat'] = len(db.AppComments_comment.distinct("categorie"))
+    context['nbr_texte'] = db.AppComments_comment.count_documents({})
 
-    # context['user_vote'] = len(request.user.commentaires.all())
     print("tttt")
 
 

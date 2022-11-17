@@ -105,4 +105,7 @@
      
 
     # comments_list = Comment.objects.filter(totaux_votes__lt=40) 
-     
+
+
+
+db.AppComments_comment.count_documents({})
