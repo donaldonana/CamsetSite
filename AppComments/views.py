@@ -42,7 +42,7 @@ def index(request):
 
     
     comments_list = db.AppComments_comment.aggregate(
-   [ {"$match": {"id" : { '$nin':comment_user } , "totaux_votes": { '$lt': 15 } }} , { '$sample': { 'size': 9 } } 
+   [ {"$match": {"id" : { '$nin':comment_user } , "totaux_votes": { '$lt': 7 } }} , { '$sample': { 'size': 9 } } 
    ])
 
     context = {'comments': comments_list }
